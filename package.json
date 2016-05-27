@@ -10,6 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.13.4",
-    "oracledb": "^1.9.3"
+    "oracledb": "^1.9.3",
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0"
   }
 }
