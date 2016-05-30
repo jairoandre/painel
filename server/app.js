@@ -11,11 +11,19 @@ import routes from './../shared/routes';
 import * as reducers from './../shared/reducers';
 var api = require('./../shared/api/api');
 
-const app = express();
+const server = express();
 
-app.use("/bundle.js", express.static(path.join(__dirname, './../dist/bundle.js')));
+server.set("env", process.env.NODE_ENV || "development");
 
-app.use('/pacientes', (req, res) => {
+if (server.get("env") === "development") {
+  server.set("bundle", "http://localhost:8080/bundle.js");
+} else {
+  server.set("bundle", "/bundle.js");
+}
+
+server.use("/bundle.js", express.static(path.join(__dirname, './../dist/bundle.js')));
+
+server.use('/pacientes', (req, res) => {
   api.consultar('HOMERO MASSENA')
     .then((result) => {
       res.send(result);
@@ -25,7 +33,7 @@ app.use('/pacientes', (req, res) => {
     });
 });
 
-app.use((req, res) => {
+server.use((req, res) => {
 
   // const location = createMemoryHistory().createLocation(req.url);
   const reducer = combineReducers(reducers);
@@ -56,14 +64,14 @@ app.use((req, res) => {
       <html>
         <head>
           <meta charset="utf-8">
-          <title>Painel de acompanhamento</title>
+          <title>Painel de acompanhamento - ${server.get("env")}</title>
         </head>
         <body>
           <div id="react-view">${componentHTML}</div>
           <script type="aplication/javascript">
             window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
           </script>
-          <script type="application/javascript" src="/bundle.js"></script>
+          <script type="application/javascript" src="${server.get("bundle")}"></script>
         </body>
       </html>
   `;
@@ -76,6 +84,6 @@ app.use((req, res) => {
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, function() {
+server.listen(PORT, function() {
   console.log(`Server listening on ${PORT}`);
 });
