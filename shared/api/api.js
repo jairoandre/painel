@@ -1,0 +1,77 @@
+'use strict'
+// var oracle = require('oracledb');
+var oracle = {};
+
+const credentials = {
+  user: 'dbamv',
+  password: 'insertvah16',
+  connectString: '10.1.0.30:1521/mvprod'
+};
+
+var pacienteLeitoColunas = [
+  'TB_ATENDIME.CD_ATENDIMENTO',
+  'UNID_INT.DS_UNID_INT',
+  'LEITO.DS_LEITO',
+  'PACIENTE.NM_PACIENTE',
+  'PRESTADOR.NM_PRESTADOR'
+];
+
+var pacienteLeitoSQL = 'SELECT ' + pacienteLeitoColunas.join() +
+  " FROM DBAMV.TB_ATENDIME \
+  JOIN DBAMV.PACIENTE \
+    ON TB_ATENDIME.CD_PACIENTE = PACIENTE.CD_PACIENTE \
+  JOIN DBAMV.LEITO \
+    ON TB_ATENDIME.CD_LEITO = LEITO.CD_LEITO \
+  JOIN DBAMV.UNID_INT \
+    ON UNID_INT.CD_UNID_INT = LEITO.CD_UNID_INT \
+  JOIN DBAMV.PRESTADOR \
+    ON TB_ATENDIME.CD_PRESTADOR = PRESTADOR.CD_PRESTADOR \
+    WHERE TB_ATENDIME.TP_ATENDIMENTO = 'I' \
+      AND UNID_INT.DS_UNID_INT = :DS_UNID_INT \
+      AND TB_ATENDIME.DT_ALTA IS NULL \
+      AND TB_ATENDIME.CD_MULTI_EMPRESA = 1";
+
+function getConnection() {
+  console.log('Conecting...');
+  return oracle.getConnection(credentials);
+}
+
+function fetchData(sql, params) {
+  return getConnection()
+    .then((conn) => {
+      console.log('Connected!');
+      return conn.execute(sql, params)
+        .then((result) => {
+          console.log('Data fetched!');
+          let results = result.rows;
+          conn.release();
+          return results;
+        })
+        .catch((err) => {
+          console.error('Fecth data error: ' + err);
+          return conn.release();
+        });
+    })
+    .catch((err) => {
+      console.error('Connection error: ' + err);
+    });
+}
+
+function fetchDummyData(sql, params) {
+  return [[1193996, "HOMERO MASSENA", "HM 107/2", "REGINA SILVA BRITO", "EDELWEISS RIBEIRO LEITE SOARES"], [1193731, "HOMERO MASSENA", "HM 105/1", "SIRLENE RAIMUNDO DA SILVA", "JORGE LUIZ KRIGER"], [1192358, "HOMERO MASSENA", "HM 113", "ELISVOLMAR COUTINHO", "JOSE SANTOS NEVES"], [1082234, "HOMERO MASSENA", "HM 104/1", "JORGE ANTONIO MACEDO DE MELLO", "JOSE SANTOS NEVES"], [1150778, "HOMERO MASSENA", "HM 122", "DIVINO BATISTA LOPES", "JOSE SANTOS NEVES"], [45493, "HOMERO MASSENA", "HM 123", "MARIA ARCIDELIA SOARES", "JOSE SANTOS NEVES"], [1169628, "HOMERO MASSENA", "HM 108/1", "ANTONIO SEBASTIAO PIOVESAN DE JESUS", "JOSE SANTOS NEVES"], [1193359, "HOMERO MASSENA", "HM 106/1", "MARIA DAS DORES DE JESUS MESQUITA OLIVEI", "JOSE SANTOS NEVES"], [1048187, "HOMERO MASSENA", "HM 103/1", "ANTONIO MIGUEL MIRANDA", "JOSE SANTOS NEVES"], [1181407, "HOMERO MASSENA", "HM 102/2", "CARLOS MAGNO FADINI", "JOSE SANTOS NEVES"], [1189571, "HOMERO MASSENA", "HM 109/1", "DORCAS ALICE DIAS", "HELOISIO ANTONIO DE SOUZA"], [1189422, "HOMERO MASSENA", "HM 121", "EVANDRO BRAZ DE SOUZA", "HELOISIO ANTONIO DE SOUZA"], [1176649, "HOMERO MASSENA", "HM 117", "BELMIRO PERINI", "HELOISIO ANTONIO DE SOUZA"], [1187574, "HOMERO MASSENA", "HM 115", "DERMEVAL BENEDICTO DOS SANTOS", "HELOISIO ANTONIO DE SOUZA"], [1116469, "HOMERO MASSENA", "HM 114", "NANCY RODRIGUES DE ALBUQUERQUE", "HELOISIO ANTONIO DE SOUZA"], [1192661, "HOMERO MASSENA", "HM 112", "REGINA RODRIGUES FREIRE SOUZA", "LUIZ VIRGILIO NESPOLI"], [1191620, "HOMERO MASSENA", "HM 119", "CARMORINA ANNA FRANCISCHETTO CESCONETTO", "LUIZ VIRGILIO NESPOLI"], [1193995, "HOMERO MASSENA", "HM 101/1", "PAMELA ALVES DOS SANTOS", "LUIZ VIRGILIO NESPOLI"], [1145943, "HOMERO MASSENA", "HM 118", "DIONE LISBOA MONIZ FREIRE", "LUIZ VIRGILIO NESPOLI"], [1161418, "HOMERO MASSENA", "HM 124", "MANUEL DE SOUSA RIBEIRO", "SERGIO GUEDES VICENTINI"], [1170075, "HOMERO MASSENA", "HM 116", "NATANAEL DE OLIVEIRA", "SERGIO GUEDES VICENTINI"], [1191970, "HOMERO MASSENA", "HM 102/1", "EPIFANIO PEREIRA DOS SANTOS", "TAMEA APARECIDA LINHARES POSSA"], [1191434, "HOMERO MASSENA", "HM 110/2", "ROMULO FERREIRA CORDEIRO", "BERNARDO GARCIA BARROSO"], [1194710, "HOMERO MASSENA", "HM 101/2", "MARIA RANGEL VIEIRA", "MARTINA ZANOTTI CARNEIRO VALENTIM"], [1186136, "HOMERO MASSENA", "HM 120", "VALTER DELUNARDO", "MAYKE ARMANI MIRANDA"], [1175568, "HOMERO MASSENA", "HM 111", "ANDERSON MACHADO DA MOTTA", "MAYKE ARMANI MIRANDA"], [1183442, "HOMERO MASSENA", "HM 110/1", "JOAO DE SOUZA SILVA", "POLYANA GITIRANA GUERRA RAMEH"]];
+}
+
+function consultar(unidade) {
+  let promise = new Promise(function (resolve, reject) {
+    // let result = fetchData(pacienteLeitoSQL, {DS_UNID_INT: unidade});
+    let result = fetchDummyData(pacienteLeitoSQL, {});
+    if (result) {
+      resolve(result);
+    } else {
+      reject('error');
+    }
+  });
+  return promise;
+}
+
+module.exports = {consultar: consultar};
