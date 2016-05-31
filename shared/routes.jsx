@@ -2,12 +2,12 @@ import React from 'react';
 import {Route} from 'react-router';
 
 import App from './components';
-import Home from './components/Home';
-import Painel from './components/Painel';
+import Todo from './components/todo/Todo';
+import Painel from './components/painel/Painel';
 
 export default (
     <Route name="app" component={App} path="/">
-        <Route component={Home} path="home"/>
+        <Route component={Todo} path="todo"/>
         <Route component={Painel} path="painel"/>
     </Route>
 );

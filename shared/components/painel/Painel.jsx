@@ -1,6 +1,11 @@
 import React from 'react';
 import PainelTable from './PainelTable';
 
+if (process.env.BROWSER) {
+    console.log('Less loading');
+    require('./Painel.less');
+}
+
 export default class Painel extends React.Component {
     createPaciente() {
         const paciente = {};

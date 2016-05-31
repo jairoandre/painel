@@ -16,12 +16,14 @@ const server = express();
 server.set("env", process.env.NODE_ENV || "development");
 
 if (server.get("env") === "development") {
-  server.set("bundle", "http://localhost:8080/bundle.js");
+  server.set("resourceUrlPrefix", "http://localhost:8080/");
 } else {
-  server.set("bundle", "/bundle.js");
+  server.set("resourceUrlPrefix", "/");
 }
 
 server.use("/bundle.js", express.static(path.join(__dirname, './../dist/bundle.js')));
+server.use("/main.css", express.static(path.join(__dirname, './../dist/main.css')));
+server.use("/imgs/", express.static(path.join(__dirname, './../shared/assets/imgs/')));
 
 server.use('/pacientes', (req, res) => {
   api.consultar('HOMERO MASSENA')
@@ -65,13 +67,14 @@ server.use((req, res) => {
         <head>
           <meta charset="utf-8">
           <title>Painel de acompanhamento - ${server.get("env")}</title>
+          <link rel="stylesheet" href="${server.get("resourceUrlPrefix")}main.css"/>
         </head>
         <body>
           <div id="react-view">${componentHTML}</div>
           <script type="aplication/javascript">
             window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
           </script>
-          <script type="application/javascript" src="${server.get("bundle")}"></script>
+          <script type="application/javascript" src="${server.get("resourceUrlPrefix")}bundle.js"></script>
         </body>
       </html>
   `;

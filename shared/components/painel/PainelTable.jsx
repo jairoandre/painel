@@ -7,9 +7,9 @@ export default class PainelTable extends React.Component {
     render() {
         const {pacientes, asa, data} = this.props;
         return (
-            <table>
+            <table className="painel-table">
                 <PainelHeader asa={asa} data={data}/>
-                <tbody style={{backgroundColor: 'yellow'}}>
+                <tbody className="painel-body">
                     {pacientes.map((paciente, key) => <PainelRow paciente={paciente} key={key}/>)}
                 </tbody>
             </table>

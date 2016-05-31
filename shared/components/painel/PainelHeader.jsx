@@ -9,7 +9,7 @@ export default class PainelHeader extends React.Component {
             <tr>
                 <th colSpan="2">Data: {data}</th>
                 <th colSpan="3">{asa}</th>
-                <th colSpan="7">Logotipo</th>
+                <th colSpan="7" className="painel-logo"></th>
             </tr>
             <tr>
                 <th>APTO</th>
