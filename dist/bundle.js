@@ -27302,18 +27302,18 @@
 	        key: 'createPaciente',
 	        value: function createPaciente() {
 	            var paciente = {};
-	            paciente.apto = 'Teste 1';
-	            paciente.nome = 'Teste';
-	            paciente.medico = 'Teste';
-	            paciente.observacao = 'Teste';
-	            paciente.previsaoAlta = 'Teste';
-	            paciente.scp = 'Teste';
-	            paciente.riscoQueda = 'Teste';
-	            paciente.alergia = 'Teste';
-	            paciente.exame = 'Teste';
-	            paciente.cirurgia = 'Teste';
-	            paciente.jejum = 'Teste';
-	            paciente.precaucao = 'Teste';
+	            paciente.apto = '206';
+	            paciente.nome = 'José da Silva';
+	            paciente.medico = 'Dra. Fernanda';
+	            paciente.observacao = 'Observação';
+	            paciente.previsaoAlta = '10/06/2016';
+	            paciente.scp = '?';
+	            paciente.riscoQueda = '?';
+	            paciente.alergia = '?';
+	            paciente.exame = '?';
+	            paciente.cirurgia = '?';
+	            paciente.jejum = '?';
+	            paciente.precaucao = '?';
 	            return paciente;
 	        }
 	    }, {
@@ -27324,7 +27324,7 @@
 	            return _react2.default.createElement(
 	                'div',
 	                { id: 'painel' },
-	                _react2.default.createElement(_PainelTable2.default, { pacientes: pacientes, asa: 'Massena', data: '30/05/2016' })
+	                _react2.default.createElement(_PainelTable2.default, { pacientes: pacientes, asa: 'Homero Massena', data: '30/05/2016' })
 	            );
 	        }
 	    }]);
@@ -27453,13 +27453,13 @@
 	                    null,
 	                    _react2.default.createElement(
 	                        "th",
-	                        { colSpan: "2" },
+	                        { colSpan: "2", className: "data" },
 	                        "Data: ",
 	                        data
 	                    ),
 	                    _react2.default.createElement(
 	                        "th",
-	                        { colSpan: "3" },
+	                        { colSpan: "3", className: "setor" },
 	                        asa
 	                    ),
 	                    _react2.default.createElement("th", { colSpan: "7", className: "painel-logo" })
@@ -27494,38 +27494,38 @@
 	                    ),
 	                    _react2.default.createElement(
 	                        "th",
-	                        null,
+	                        { className: "detalhe scp" },
 	                        "SCP"
 	                    ),
 	                    _react2.default.createElement(
 	                        "th",
-	                        null,
+	                        { className: "detalhe queda" },
 	                        "RISCO DE QUEDA"
 	                    ),
 	                    _react2.default.createElement(
 	                        "th",
-	                        null,
+	                        { className: "detalhe alergia" },
 	                        "ALERGIA"
 	                    ),
 	                    _react2.default.createElement(
 	                        "th",
-	                        null,
+	                        { className: "detalhe exame" },
 	                        "EXAME"
 	                    ),
 	                    _react2.default.createElement(
 	                        "th",
-	                        null,
+	                        { className: "detalhe cirurgia" },
 	                        "CIRURGIA"
 	                    ),
 	                    _react2.default.createElement(
 	                        "th",
-	                        null,
+	                        { className: "detalhe jejum" },
 	                        "JEJUM"
 	                    ),
 	                    _react2.default.createElement(
 	                        "th",
-	                        null,
-	                        "PRECAUÇÃO"
+	                        { className: "detalhe precaucao" },
+	                        "PRECAU- ÇÃO"
 	                    )
 	                )
 	            );

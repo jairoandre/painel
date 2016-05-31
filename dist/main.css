@@ -421,24 +421,56 @@ table {
 td,
 th {
     padding: 0;
-}body {
-  background-color: #5a7716;
-}
-.painel-table {
+}.painel-table {
   border-collapse: collapse;
-  background-color: #2f8e07;
-  color: #FFFFFF;
-  padding: 15px;
+  border: 2px solid #ffffff;
 }
-.painel-table th {
-  text-align: left;
+.painel-table .data {
+  font-size: 30px;
+  color: #666;
+}
+.painel-table .setor {
+  background-color: #233269;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 35px;
+  color: #fff;
+}
+th.detalhe {
+  font-size: 10px;
+  text-align: center;
+  vertical-align: middle;
+  width: 4%;
+  color: #fff;
+  font-size: 8px;
+}
+th.scp {
+  background-color: #00afee;
+}
+th.queda {
+  background-color: #00a95a;
+}
+th.alergia {
+  background-color: #ea278f;
+}
+th.exame {
+  background-color: #989898;
+}
+th.cirurgia {
+  background-color: #f38634;
+}
+th.jejum {
+  background-color: #85706d;
+}
+th.precaucao {
+  background-color: #ffcc28;
 }
 .painel-table td,
 .painel-table th {
   padding: 15px;
 }
 .painel-body {
-  background-color: red;
+  background-color: #e3e7ea;
 }
 .painel-logo {
   background: url('/imgs/logo.png');

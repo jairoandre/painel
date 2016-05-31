@@ -9,18 +9,18 @@ if (process.env.BROWSER) {
 export default class Painel extends React.Component {
     createPaciente() {
         const paciente = {};
-        paciente.apto = 'Teste 1';
-        paciente.nome = 'Teste';
-        paciente.medico = 'Teste';
-        paciente.observacao = 'Teste';
-        paciente.previsaoAlta = 'Teste';
-        paciente.scp = 'Teste';
-        paciente.riscoQueda = 'Teste';
-        paciente.alergia = 'Teste';
-        paciente.exame = 'Teste';
-        paciente.cirurgia = 'Teste';
-        paciente.jejum = 'Teste';
-        paciente.precaucao = 'Teste';
+        paciente.apto = '206';
+        paciente.nome = 'José da Silva';
+        paciente.medico = 'Dra. Fernanda';
+        paciente.observacao = 'Observação';
+        paciente.previsaoAlta = '10/06/2016';
+        paciente.scp = '?';
+        paciente.riscoQueda = '?';
+        paciente.alergia = '?';
+        paciente.exame = '?';
+        paciente.cirurgia = '?';
+        paciente.jejum = '?';
+        paciente.precaucao = '?';
         return paciente;
     }
 
@@ -29,7 +29,7 @@ export default class Painel extends React.Component {
 
         return (
             <div id="painel">
-                <PainelTable pacientes={pacientes} asa="Massena" data="30/05/2016"/>
+                <PainelTable pacientes={pacientes} asa="Homero Massena" data="30/05/2016"/>
             </div>
         );
     }
