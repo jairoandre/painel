@@ -9,35 +9,49 @@ import { createStore, combineReducers } from 'redux';
 
 import routes from './../shared/routes';
 import * as reducers from './../shared/reducers';
-var api = require('./../shared/api/api');
+var api = require('./rest/api');
 
 const server = express();
 
-server.set("env", process.env.NODE_ENV || "development");
+server.set('env', process.env.NODE_ENV || 'development');
 
-if (server.get("env") === "development") {
-  server.set("resourceUrlPrefix", "http://localhost:8080/");
+if (server.get('env') === 'development') {
+  server.set('resourceUrlPrefix', 'http://localhost:8080/');
 } else {
-  server.set("resourceUrlPrefix", "/");
+  server.set('resourceUrlPrefix', '/');
 }
 
-server.use("/bundle.js", express.static(path.join(__dirname, './../dist/bundle.js')));
-server.use("/main.css", express.static(path.join(__dirname, './../dist/main.css')));
-server.use("/imgs/", express.static(path.join(__dirname, './../shared/assets/imgs/')));
+// REST
 
-server.use('/pacientes', (req, res) => {
-  api.consultar('HOMERO MASSENA')
+var apiRouter = express.Router();
+
+apiRouter.get('/pacientes/:unidade', (req, res) => {
+  api.consultar(req.params.unidade)
     .then((result) => {
-      res.send(result);
+      console.log('Searched');
+      res.send(result.map((arr) => {
+        return {
+          apto: arr[2],
+          nome: arr[3],
+          medico: arr[4]
+        };}));
+      res.end();
     })
     .catch((err) => {
+      console.log('Error');
       res.send(err);
+      res.end();
     });
 });
 
+server.use('/api', apiRouter);
+
+server.use('/bundle.js', express.static(path.join(__dirname, './../dist/bundle.js')));
+server.use('/main.css', express.static(path.join(__dirname, './../dist/main.css')));
+server.use('/imgs/', express.static(path.join(__dirname, './../shared/assets/imgs/')));
+
 server.use((req, res) => {
 
-  // const location = createMemoryHistory().createLocation(req.url);
   const reducer = combineReducers(reducers);
   const store = createStore(reducer);
 
@@ -52,9 +66,9 @@ server.use((req, res) => {
     }
 
     const InitialComponent = (
-      <Provider store={ store }>
-        <RouterContext {...renderProps} />
-      </Provider>
+    <Provider store={store}>
+      <RouterContext {...renderProps} />
+    </Provider>
     );
 
     const initialState = store.getState();
@@ -66,27 +80,25 @@ server.use((req, res) => {
       <html>
         <head>
           <meta charset="utf-8">
-          <title>Painel de acompanhamento - ${server.get("env")}</title>
-          <link rel="stylesheet" href="${server.get("resourceUrlPrefix")}main.css"/>
+          <title>Painel de acompanhamento - ${server.get('env')}</title>
+          <link rel="stylesheet" href="${server.get('resourceUrlPrefix')}main.css"/>
         </head>
         <body>
           <div id="react-view">${componentHTML}</div>
           <script type="aplication/javascript">
-            window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
+            window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}
           </script>
-          <script type="application/javascript" src="${server.get("resourceUrlPrefix")}bundle.js"></script>
+          <script type="application/javascript" src="${server.get('resourceUrlPrefix')}bundle.js"></script>
         </body>
       </html>
   `;
 
     res.end(HTML);
   });
-
 });
-
 
 const PORT = process.env.PORT || 3000;
 
-server.listen(PORT, function() {
+server.listen(PORT, function () {
   console.log(`Server listening on ${PORT}`);
 });

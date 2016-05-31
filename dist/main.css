@@ -421,57 +421,77 @@ table {
 td,
 th {
     padding: 0;
-}.painel-table {
+}.painelTb {
   border-collapse: collapse;
-  border: 2px solid #ffffff;
 }
-.painel-table .data {
+.painelTb__data {
   font-size: 30px;
   color: #666;
+  padding: 15px;
 }
-.painel-table .setor {
+.painelTb__setor {
   background-color: #233269;
   text-align: center;
   vertical-align: middle;
   font-size: 35px;
   color: #fff;
+  padding: 15px;
 }
-th.detalhe {
+.painelTb__th {
+  font-size: 15px;
+  padding: 15px;
+  font-weight: bold;
+  background-color: #7481ae;
+  color: #fff;
+  border: 1px solid #ffffff;
+}
+.painelTb__th--darker {
+  background-color: #233269;
+}
+.painelTb__th--left {
+  text-align: left;
+}
+.painelTb__th--previsao {
+  font-size: 8px;
+  background-color: #eb3134;
+  width: 5%;
+  text-align: center;
+}
+.painelTb__th--detalhe {
   font-size: 10px;
   text-align: center;
   vertical-align: middle;
-  width: 4%;
-  color: #fff;
+  width: 5%;
   font-size: 8px;
 }
-th.scp {
+.painelTb__th--scp {
   background-color: #00afee;
 }
-th.queda {
+.painelTb__th--queda {
   background-color: #00a95a;
 }
-th.alergia {
+.painelTb__th--alergia {
   background-color: #ea278f;
 }
-th.exame {
+.painelTb__th--exame {
   background-color: #989898;
 }
-th.cirurgia {
+.painelTb__th--cirurgia {
   background-color: #f38634;
 }
-th.jejum {
+.painelTb__th--jejum {
   background-color: #85706d;
 }
-th.precaucao {
+.painelTb__th--precaucao {
   background-color: #ffcc28;
 }
-.painel-table td,
-.painel-table th {
+.painelTb__tr {
+  background-color: #f0f0f0;
+}
+.painelTb__tr--zebra {
+  background-color: #ffffff;
+}
+.painelTb__td {
+  text-align: left;
   padding: 15px;
-}
-.painel-body {
-  background-color: #e3e7ea;
-}
-.painel-logo {
-  background: url('/imgs/logo.png');
 }

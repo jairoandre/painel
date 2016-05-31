@@ -1,36 +1,31 @@
 import React from 'react';
 import PainelTable from './PainelTable';
 
+var moment = require('moment');
+
 if (process.env.BROWSER) {
-    console.log('Less loading');
-    require('./Painel.less');
+  console.log('Less loading');
+  require('./Painel.less');
 }
 
 export default class Painel extends React.Component {
-    createPaciente() {
-        const paciente = {};
-        paciente.apto = '206';
-        paciente.nome = 'José da Silva';
-        paciente.medico = 'Dra. Fernanda';
-        paciente.observacao = 'Observação';
-        paciente.previsaoAlta = '10/06/2016';
-        paciente.scp = '?';
-        paciente.riscoQueda = '?';
-        paciente.alergia = '?';
-        paciente.exame = '?';
-        paciente.cirurgia = '?';
-        paciente.jejum = '?';
-        paciente.precaucao = '?';
-        return paciente;
-    }
 
-    render() {
-        const pacientes = Array(4).fill(this.createPaciente());
+  componentWillMount () {
+    const { unidade } = this.props;
+    this.props.listarPacientes(unidade);
+    return;
+  }
 
-        return (
-            <div id="painel">
-                <PainelTable pacientes={pacientes} asa="Homero Massena" data="30/05/2016"/>
-            </div>
-        );
-    }
-}
+  render () {
+    const { pacientes, unidade } = this.props;
+
+    const date = new Date();
+    const dateStr = moment(date).format('DD/MM/YYYY');
+
+    return (
+    <div id="painel">
+      <PainelTable pacientes={pacientes} unidade={unidade} data={dateStr} />
+    </div>
+    );
+  }
+};

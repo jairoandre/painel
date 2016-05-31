@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "set NODE_ENV=production && node server/runner.js",
+    "linux": "NODE_ENV=production node server/runner.js",
     "build": "webpack --progress --color",
     "prod-server": "set NODE_ENV=production && pm2 start server/runner.js --name painel",
     "prod": "./node_modules/.bin/npm-run-all --parallel build start",
@@ -19,6 +20,7 @@
     "express": "^4.13.4",
     "immutable": "^3.8.1",
     "object-assign": "^4.1.0",
+    "oracledb": "^1.9.3",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-redux": "^4.4.5",
