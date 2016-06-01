@@ -26,6 +26,11 @@ if (server.get('env') === 'development') {
 var apiRouter = express.Router();
 
 apiRouter.get('/pacientes/:unidade', (req, res) => {
+  res.send([{apto: 202, nome: 'Pedro', medico: 'Dr. Paulo'}]);
+  res.end();
+})
+
+apiRouter.get('/_pacientes/:unidade', (req, res) => {
   api.consultar(req.params.unidade)
     .then((result) => {
       console.log('Searched');

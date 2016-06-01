@@ -10,9 +10,9 @@ if (process.env.BROWSER) {
 
 export default class Painel extends React.Component {
 
-  componentWillMount () {
+  componentDidMount () {
     const { unidade } = this.props;
-    this.props.listarPacientes(unidade);
+    this.props.fetchPacientesIfNeeded(unidade);
     return;
   }
 

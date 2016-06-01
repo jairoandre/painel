@@ -1,2 +1,2 @@
 export { default as todos } from './TodoReducer';
-export { default as pacientes } from './PainelReducer';
+export { default as painelReducer } from './PainelReducer';

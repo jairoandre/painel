@@ -1,23 +1,61 @@
-import { List } from 'immutable';
+import { combineReducers } from 'redux'
+import {
+  SELECT_UNIDADE, INVALIDATE_UNIDADE,
+  REQUEST_PACIENTES, RECEIVE_PACIENTES
+} from '../actions'
 
-var axios = require('axios');
-
-const defaultState = [{apto: 1, nome: 'teste', medico: 'dr. teste'}];
-
-export default function painelReducer (state = defaultState , action) {
+function selectedUnidade(state = {pacientes: []}, action) {
   switch (action.type) {
-    case 'LISTAR_PACIENTES':
-      axios.get(`http://localhost:3000/api/pacientes/${action.unidade}`)
-        .then(function (res) {
-          return res.data;
-        })
-        .catch(function (res) {
-          console.log(res);
-          return state;
-        });
-      break;
+    case SELECT_UNIDADE:
+      return action.unidade
     default:
-      console.log('teste');
-      return state;
+      return state
   }
-};
+}
+
+function pacientes(state = {
+  isFetching: false,
+  didInvalidate: false,
+  pacientes: []
+}, action) {
+  switch (action.type) {
+    case INVALIDATE_UNIDADE:
+      return Object.assign({}, state, {
+        didInvalidate: true
+      })
+    case REQUEST_PACIENTES:
+      return Object.assign({}, state, {
+        isFetching: true,
+        didInvalidate: false
+      })
+    case RECEIVE_PACIENTES:
+      return Object.assign({}, state, {
+        isFetching: false,
+        didInvalidate: false,
+        pacientes: action.pacientes,
+        lastUpdated: action.receivedAt
+      })
+    default:
+      return state
+  }
+}
+
+function pacientesByUnidade(state = { pacientes: [] }, action) {
+  switch (action.type) {
+    case INVALIDATE_UNIDADE:
+    case RECEIVE_PACIENTES:
+    case REQUEST_PACIENTES:
+      return Object.assign({}, state, {
+        [action.unidade]: pacientes(state[action.unidade], action)
+      })
+    default:
+      return state
+  }
+}
+
+const rootReducer = combineReducers({
+  pacientesByUnidade,
+  selectedUnidade
+})
+
+export default rootReducer
