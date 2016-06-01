@@ -16,9 +16,10 @@
   "author": "jairoportela",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.11.1",
     "express": "^4.13.4",
     "immutable": "^3.8.1",
+    "isomorphic-fetch": "^2.2.1",
+    "moment": "^2.13.0",
     "object-assign": "^4.1.0",
     "oracledb": "^1.9.3",
     "react": "^15.1.0",
