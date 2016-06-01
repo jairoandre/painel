@@ -1,4 +1,5 @@
 import React from 'react';
+import PrevisaoAlta from '../container/PrevisaoAlta';
 
 export default class PainelRow extends React.Component {
 
@@ -10,7 +11,7 @@ export default class PainelRow extends React.Component {
                 <td className="painelTb__td">{paciente.nome}</td>
                 <td className="painelTb__td">{paciente.medico}</td>
                 <td className="painelTb__td">{paciente.observacao}</td>
-                <td className="painelTb__td">{paciente.previsaoAlta}</td>
+                <td className="painelTb__td"><PrevisaoAlta value={paciente.atendimento}/></td>
                 <td className="painelTb__td">{paciente.scp}</td>
                 <td className="painelTb__td">{paciente.riscoQueda}</td>
                 <td className="painelTb__td">{paciente.alergia}</td>

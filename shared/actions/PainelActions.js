@@ -39,7 +39,7 @@ function receivePacientes(unidade, pacientes) {
 function fetchPacientes(unidade) {
   return dispatch => {
     dispatch(requestPacientes(unidade))
-    return fetch(`http://localhost:3000/api/pacientes/${unidade}`)
+    return fetch(`/api/pacientes/${unidade}`)
       .then(response => response.json())
       .then(pacientes => dispatch(receivePacientes(unidade, pacientes)))
   }

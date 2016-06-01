@@ -8,7 +8,7 @@
     "linux": "NODE_ENV=production node server/runner.js",
     "build": "webpack --progress --color",
     "prod-server": "set NODE_ENV=production && pm2 start server/runner.js --name painel",
-    "prod": "./node_modules/.bin/npm-run-all --parallel build start",
+    "prod": "./node_modules/.bin/npm-run-all build start",
     "dev-server": "node server/webpack",
     "dev-runner": "nodemon server/runner",
     "dev": "./node_modules/.bin/npm-run-all --parallel dev-server dev-runner"
@@ -16,7 +16,9 @@
   "author": "jairoportela",
   "license": "MIT",
   "dependencies": {
+    "async": "^2.0.0-rc.5",
     "express": "^4.13.4",
+    "http": "0.0.0",
     "immutable": "^3.8.1",
     "isomorphic-fetch": "^2.2.1",
     "moment": "^2.13.0",

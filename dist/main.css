@@ -428,6 +428,7 @@ th {
   font-size: 30px;
   color: #666;
   padding: 15px;
+  text-align: left;
 }
 .painelTb__setor {
   background-color: #233269;
@@ -494,4 +495,5 @@ th {
 .painelTb__td {
   text-align: left;
   padding: 15px;
+  font-size: 10px;
 }
