@@ -5,10 +5,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { RouterContext, match, createMemoryHistory } from 'react-router';
-import { createStore, combineReducers } from 'redux';
+import configureStore from '../shared/store/configureStore';
 
 import routes from './../shared/routes';
-import * as reducers from './../shared/reducers';
 var api = require('./rest/api');
 
 const server = express();
@@ -26,7 +25,7 @@ if (server.get('env') === 'development') {
 var apiRouter = express.Router();
 
 apiRouter.get('/pacientes/:unidade', (req, res) => {
-  res.send([{apto: 202, nome: 'Pedro', medico: 'Dr. Paulo'}]);
+  res.send([{apto: 202, nome: 'Pedro', medico: 'Dr. Paulo', observacao: req.params.unidade}]);
   res.end();
 })
 
@@ -38,7 +37,9 @@ apiRouter.get('/_pacientes/:unidade', (req, res) => {
         return {
           apto: arr[2],
           nome: arr[3],
-          medico: arr[4]
+          medico: arr[4],
+          observacao: ('Teste' + req.params.unidade),
+          scp: 'Q?'
         };}));
       res.end();
     })
@@ -57,8 +58,7 @@ server.use('/imgs/', express.static(path.join(__dirname, './../shared/assets/img
 
 server.use((req, res) => {
 
-  const reducer = combineReducers(reducers);
-  const store = createStore(reducer);
+  const store = configureStore({});
 
   match({routes, location: req.url}, (err, redirectLocation, renderProps) => {
     if (err) {
@@ -105,5 +105,5 @@ server.use((req, res) => {
 const PORT = process.env.PORT || 3000;
 
 server.listen(PORT, function () {
-  console.log(`Server listening on ${PORT}`);
+  console.log(`==> 🌎  Listening on port ${PORT}. Open up http://localhost:${PORT}/ in your browser.`);
 });

@@ -40,13 +40,13 @@ function fetchPacientes(unidade) {
   return dispatch => {
     dispatch(requestPacientes(unidade))
     return fetch(`http://localhost:3000/api/pacientes/${unidade}`)
-      .then(response => response.data)
+      .then(response => response.json())
       .then(pacientes => dispatch(receivePacientes(unidade, pacientes)))
   }
 }
 
 function shouldFetchPacientes(state, unidade) {
-  const pacientes = state.pacientesUnidade[unidade]
+  const pacientes = state.pacientesByUnidade[unidade]
   if (!pacientes) {
     return true
   }

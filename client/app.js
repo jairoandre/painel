@@ -3,9 +3,8 @@ import ReactDOM from 'react-dom';
 import { Router, browserHistory } from 'react-router';
 import routes from './../shared/routes';
 
-import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import * as reducers from './../shared/reducers';
+import configureStore from '../shared/store/configureStore';
 import { fromJS } from 'immutable';
 
 const initialState = window.__INITIAL_STATE__ || {};
@@ -18,8 +17,7 @@ Object
     initialState[key] = fromJS(initialState[key]);
   });
 
-const reducer = combineReducers(reducers);
-const store = createStore(reducer, initialState);
+const store = configureStore(initialState);
 
 ReactDOM.render(
   <Provider store={ store }>
