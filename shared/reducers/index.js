@@ -2,8 +2,9 @@ import {combineReducers} from 'redux'
 import {
     SELECT_UNIDADE, INVALIDATE_UNIDADE,
     REQUEST_PACIENTES, RECEIVE_PACIENTES,
-    REQUEST_PREVISAO_ALTA, RECEIVE_PREVISAO_ALTA
+    REQUEST_PREVISAO_ALTA, RECEIVE_PREVISAO_ALTA, SHUFFLE_PACIENTES
 } from '../actions'
+import { shuffle } from 'lodash';
 
 function selectedUnidade(state = '', action) {
     switch (action.type) {
@@ -36,6 +37,10 @@ function pacientes(state = {
                 items: action.pacientes,
                 lastUpdated: action.receivedAt
             })
+        case SHUFFLE_PACIENTES:
+            console.log(action.pacientes);
+            console.log(action.unidade);
+            return {...state, items: shuffle(action.pacientes)}
         default:
             return state
     }
@@ -46,6 +51,7 @@ function pacientesByUnidade(state = {}, action) {
         case INVALIDATE_UNIDADE:
         case RECEIVE_PACIENTES:
         case REQUEST_PACIENTES:
+        case SHUFFLE_PACIENTES:
             return Object.assign({}, state, {
                 [action.unidade]: pacientes(state[action.unidade], action)
             })

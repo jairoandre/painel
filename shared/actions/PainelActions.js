@@ -4,6 +4,14 @@ export const SELECT_UNIDADE = 'SELECT_UNIDADE';
 export const INVALIDATE_UNIDADE = 'INVALIDATE_UNIDADE';
 export const REQUEST_PACIENTES = 'REQUEST_PACIENTES';
 export const RECEIVE_PACIENTES = 'RECEIVE_PACIENTES';
+export const SHUFFLE_PACIENTES = 'SHUFFLE_PACIENTES';
+
+export function shufflePacientes(unidade) {
+  return {
+    type: SHUFFLE_PACIENTES,
+    unidade
+  }
+}
 
 
 export function selectUnidade(unidade) {

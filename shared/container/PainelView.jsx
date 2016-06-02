@@ -4,7 +4,6 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as PainelActions from '../actions/PainelActions';
 import {getFullName} from '../utils/Utils';
-import { shuffle } from 'lodash';
 
 var moment = require('moment');
 
@@ -22,9 +21,7 @@ class PainelView extends Component {
     }
 
     shufflePacientes() {
-        this.setState({
-            pacientes: shuffle(this.state.pacientes)
-        })
+        this.props.shufflePacientes(this.props.params.unidade);
     }
 
     handleChange(nextUnidade) {
@@ -63,7 +60,8 @@ PainelView.propTypes = {
     isFetching: PropTypes.bool.isRequired,
     lastUpdated: PropTypes.number,
     selectUnidade: PropTypes.func.isRequired,
-    fetchPacientesIfNeeded: PropTypes.func.isRequired
+    fetchPacientesIfNeeded: PropTypes.func.isRequired,
+    shufflePacientes: PropTypes.func.isRequired
 };
 
 function mapStateToProps(state) {

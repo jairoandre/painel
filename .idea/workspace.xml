@@ -2,22 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b74ed900-b486-4b2b-8e95-2eda3028840e" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/shared/components/PainelTable.jsx" afterPath="$PROJECT_DIR$/shared/components/Painel.jsx" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/shared/container/Painel.jsx" afterPath="$PROJECT_DIR$/shared/container/PainelView.jsx" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/shared/container/Painel.less" afterPath="$PROJECT_DIR$/shared/components/Painel.less" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/bundle.js" afterPath="$PROJECT_DIR$/dist/bundle.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/main.css" afterPath="$PROJECT_DIR$/dist/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/api.js" afterPath="$PROJECT_DIR$/server/api.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/app.js" afterPath="$PROJECT_DIR$/server/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/oracle/database.js" afterPath="$PROJECT_DIR$/server/oracle/database.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shared/components/PainelHeader.jsx" afterPath="$PROJECT_DIR$/shared/components/PainelHeader.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shared/components/PainelRow.jsx" afterPath="$PROJECT_DIR$/shared/components/PainelRow.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shared/container/PrevisaoAlta.jsx" afterPath="$PROJECT_DIR$/shared/container/PrevisaoAlta.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shared/routes.jsx" afterPath="$PROJECT_DIR$/shared/routes.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webpack.config.dev.js" afterPath="$PROJECT_DIR$/webpack.config.dev.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webpack.config.js" afterPath="$PROJECT_DIR$/webpack.config.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shared/actions/PainelActions.js" afterPath="$PROJECT_DIR$/shared/actions/PainelActions.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shared/container/PainelView.jsx" afterPath="$PROJECT_DIR$/shared/container/PainelView.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shared/reducers/index.js" afterPath="$PROJECT_DIR$/shared/reducers/index.js" />
     </list>
     <ignored path="painel.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -82,14 +72,46 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PainelView.jsx" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shared/reducers/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="612">
+              <caret line="36" column="27" selection-start-line="36" selection-start-column="27" selection-end-line="36" selection-end-column="27" />
+              <folding>
+                <element signature="e#0#37#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="api.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/server/api.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="18" column="2912" selection-start-line="18" selection-start-column="2912" selection-end-line="18" selection-end-column="2912" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PainelView.jsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shared/container/PainelView.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="765">
-              <caret line="57" column="1" selection-start-line="57" selection-start-column="1" selection-end-line="57" selection-end-column="1" />
+            <state relative-caret-position="442">
+              <caret line="38" column="25" selection-start-line="38" selection-start-column="25" selection-end-line="38" selection-end-column="25" />
               <folding>
                 <element signature="e#0#50#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PainelActions.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shared/actions/PainelActions.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -109,36 +131,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="204">
               <caret line="13" column="163" selection-start-line="13" selection-start-column="119" selection-end-line="13" selection-end-column="163" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="webpack.config.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/webpack.config.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="44" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="44" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="webpack.config.dev.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/webpack.config.dev.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="32" column="24" selection-start-line="32" selection-start-column="24" selection-end-line="32" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="api.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/api.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="246">
-              <caret line="63" column="24" selection-start-line="63" selection-start-column="24" selection-end-line="63" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -179,16 +171,13 @@
         <option value="$PROJECT_DIR$/shared/container/index.jsx" />
         <option value="$PROJECT_DIR$/shared/container/App.jsx" />
         <option value="$PROJECT_DIR$/shared/utils/Utils.js" />
-        <option value="$PROJECT_DIR$/shared/actions/PainelActions.js" />
         <option value="$PROJECT_DIR$/shared/actions/index.js" />
         <option value="$PROJECT_DIR$/shared/store/configureStore.js" />
-        <option value="$PROJECT_DIR$/shared/reducers/index.js" />
         <option value="$PROJECT_DIR$/shared/container/Painel.less" />
         <option value="$PROJECT_DIR$/server/oracle/oracle.js" />
         <option value="$PROJECT_DIR$/server/oracle/dbconfig.js" />
         <option value="$PROJECT_DIR$/server/rest/api.js" />
         <option value="$PROJECT_DIR$/server/oracle/database.js" />
-        <option value="$PROJECT_DIR$/server/api.js" />
         <option value="$PROJECT_DIR$/shared/actions/PrevisaoAltaActions.js" />
         <option value="$PROJECT_DIR$/shared/container/PrevisaoAlta.jsx" />
         <option value="$PROJECT_DIR$/shared/container/Painel.jsx" />
@@ -202,7 +191,10 @@
         <option value="$PROJECT_DIR$/shared/components/PainelRow.jsx" />
         <option value="$PROJECT_DIR$/shared/components/Painel.less" />
         <option value="$PROJECT_DIR$/shared/components/Painel.jsx" />
+        <option value="$PROJECT_DIR$/shared/actions/PainelActions.js" />
         <option value="$PROJECT_DIR$/shared/container/PainelView.jsx" />
+        <option value="$PROJECT_DIR$/shared/reducers/index.js" />
+        <option value="$PROJECT_DIR$/server/api.js" />
       </list>
     </option>
   </component>
@@ -465,12 +457,12 @@
       <workItem from="1464700653481" duration="8842000" />
       <workItem from="1464784709499" duration="5976000" />
       <workItem from="1464796306514" duration="25524000" />
-      <workItem from="1464891140389" duration="14145000" />
+      <workItem from="1464891140389" duration="15156000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="68477000" />
+    <option name="totallyTimeSpent" value="69488000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1432" y="-8" width="1382" height="784" extended-state="6" />
@@ -684,24 +676,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shared/reducers/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="901">
-          <caret line="58" column="23" selection-start-line="58" selection-start-column="23" selection-end-line="58" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#37#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shared/actions/PainelActions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="32" column="12" selection-start-line="32" selection-start-column="12" selection-end-line="32" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/shared/actions/PrevisaoAltaActions.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="561">
@@ -762,14 +736,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/api.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="63" column="24" selection-start-line="63" selection-start-column="24" selection-end-line="63" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/webpack.config.dev.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
@@ -810,13 +776,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shared/components/Painel.jsx">
+    <entry file="file://$PROJECT_DIR$/shared/actions/PainelActions.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="34" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="255">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -838,13 +802,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/shared/components/Painel.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="34" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/shared/container/PainelView.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="57" column="1" selection-start-line="57" selection-start-column="1" selection-end-line="57" selection-end-column="1" />
+        <state relative-caret-position="442">
+          <caret line="38" column="25" selection-start-line="38" selection-start-column="25" selection-end-line="38" selection-end-column="25" />
           <folding>
             <element signature="e#0#50#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shared/reducers/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="36" column="27" selection-start-line="36" selection-start-column="27" selection-end-line="36" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/api.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="2912" selection-start-line="18" selection-start-column="2912" selection-end-line="18" selection-end-column="2912" />
+          <folding />
         </state>
       </provider>
     </entry>
