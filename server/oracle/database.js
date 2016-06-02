@@ -5,6 +5,7 @@ var buildupScripts = [];
 var teardownScripts = [];
 
 module.exports.OBJECT = oracledb.OBJECT;
+module.exports.ARRAY = oracledb.ARRAY;
 
 function createPool(config) {
     return new Promise(function (resolve, reject) {

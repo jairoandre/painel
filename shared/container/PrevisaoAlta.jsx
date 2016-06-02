@@ -44,8 +44,6 @@ PrevisaoAlta.propTypes = {
 
 function mapStateToProps(state) {
     const { previsaoAltaByAtendimento: previsoes } = state;
-
-
     return {
         previsoes
     };

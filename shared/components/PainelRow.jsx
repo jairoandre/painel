@@ -6,20 +6,20 @@ export default class PainelRow extends React.Component {
     render() {
         const {paciente, index} = this.props;
         return (
-            <tr className={ (index % 2 === 0) ? 'painelTb__tr' : 'painelTb__tr--zebra'}>
-                <td className="painelTb__td">{paciente.apto}</td>
-                <td className="painelTb__td">{paciente.nome}</td>
-                <td className="painelTb__td">{paciente.medico}</td>
-                <td className="painelTb__td">{paciente.observacao}</td>
-                <td className="painelTb__td"><PrevisaoAlta value={paciente.atendimento}/></td>
-                <td className="painelTb__td">{paciente.scp}</td>
-                <td className="painelTb__td">{paciente.riscoQueda}</td>
-                <td className="painelTb__td">{paciente.alergia}</td>
-                <td className="painelTb__td">{paciente.exame}</td>
-                <td className="painelTb__td">{paciente.cirurgia}</td>
-                <td className="painelTb__td">{paciente.jejum}</td>
-                <td className="painelTb__td">{paciente.precaucao}</td>
-            </tr>
+            <div className={(index % 2 === 0) ? 'panel__body__row' : 'panel__body__row panel__body__row--zebra'}>
+                <div className="panel__body__row__elem panel__body__row__elem--small">{paciente.leito}</div>
+                <div className="panel__body__row__elem panel__body__row__elem--name">{paciente.nome}</div>
+                <div className="panel__body__row__elem panel__body__row__elem--medic">{paciente.medico}</div>
+                <div className="panel__body__row__elem panel__body__row__elem--obs">{paciente.observacao}</div>
+                <div className="panel__body__row__elem panel__body__row__elem--small panel__body__row__elem--previsao"><PrevisaoAlta value={paciente.atendimento}/></div>
+                <div className="panel__body__row__elem panel__body__row__elem--small panel__body__row__elem--scp">{paciente.scp}</div>
+                <div className="panel__body__row__elem panel__body__row__elem--small panel__body__row__elem--riscoQueda">{paciente.riscoQueda}</div>
+                <div className="panel__body__row__elem panel__body__row__elem--small panel__body__row__elem--alergia">{paciente.alergia}</div>
+                <div className="panel__body__row__elem panel__body__row__elem--small panel__body__row__elem--exame">{paciente.exame}</div>
+                <div className="panel__body__row__elem panel__body__row__elem--small panel__body__row__elem--cirurgia">{paciente.cirurgia}</div>
+                <div className="panel__body__row__elem panel__body__row__elem--small panel__body__row__elem--jejum">{paciente.jejum}</div>
+                <div className="panel__body__row__elem panel__body__row__elem--small panel__body__row__elem--precaucao">{paciente.precaucao}</div>
+            </div>
         );
     }
 }

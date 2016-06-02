@@ -37,6 +37,7 @@ const pacienteLeitoSQL = `
       AND UNID_INT.DS_UNID_INT = :DS_UNID_INT
       AND TB_ATENDIME.DT_ALTA IS NULL
       AND TB_ATENDIME.CD_MULTI_EMPRESA = 1
+      ORDER BY LEITO.DS_LEITO
 `;
 
 const previsaoAltaSQL = `
@@ -51,13 +52,19 @@ SELECT MAX(ITPRE_MED.DH_INICIAL)
         AND ITPRE_MED.TP_SITUACAO = 'N'
 `;
 
-
 function getPacientes(req, res, next) {
     database.simpleExecute(pacienteLeitoSQL,
         {DS_UNID_INT: req.params.unidade},
-        {outFormat: database.OBJECT})
+        {outFormat: database.ARRAY})
         .then(function (results) {
-            res.send(results.rows);
+            res.send(results.rows.map((item) => {
+                return {
+                    atendimento: item[0],
+                    leito: item[1],
+                    nome: item[2],
+                    medico: item[3]
+                }
+            }));
         })
         .catch(function (err) {
             next(err);
@@ -67,9 +74,12 @@ function getPacientes(req, res, next) {
 function getPrevisaoAlta(req, res, next) {
     database.simpleExecute(previsaoAltaSQL,
         {CD_ATENDIMENTO: req.params.atendimento},
-        {outFormat: database.OBJECT})
+        {outFormat: database.ARRAY})
         .then(function (results) {
-            res.send(results);
+            if (results.rows[0][0])
+                res.send({previsaoAlta: results.rows[0][0]});
+            else
+                res.send({previsaoAlta: null});        
         })
         .catch(function (err) {
             next(err);

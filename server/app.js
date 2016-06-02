@@ -50,9 +50,11 @@ function initApp() {
 
   app.set('env', process.env.NODE_ENV || 'development');
 
-  if (app.get('env') === 'development') {
-    app.set('resourceUrlPrefix', 'http://localhost:8080/');
+  if (process.env.NODE_ENV === 'development') {
+    app.set('cssInclude', '');
+    app.set('resourceUrlPrefix', 'http://localhost:8080/')
   } else {
+    app.set('cssInclude', `<link rel="stylesheet" href="/main.css"/>`);
     app.set('resourceUrlPrefix', '/');
   }
 
@@ -89,8 +91,8 @@ function initApp() {
       <html>
         <head>
           <meta charset="utf-8">
-          <title>Painel de acompanhamento - ${app.get('env')}</title>
-          <link rel="stylesheet" href="${app.get('resourceUrlPrefix')}main.css"/>
+          <title>Painel - ${app.get('env')}</title>
+          ${app.get('cssInclude')}
         </head>
         <body>
           <div id="react-view">${componentHTML}</div>

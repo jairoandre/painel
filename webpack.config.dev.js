@@ -1,6 +1,5 @@
 var path = require('path');
 var webpack = require('webpack');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
   devtool: 'inline-source-map',
@@ -22,8 +21,7 @@ module.exports = {
         NODE_ENV: JSON.stringify("development"),
         BROWSER: JSON.stringify(true)
       }
-    }),
-    new ExtractTextPlugin("[name].css")
+    })
   ],
   resolve: {
     modulesDirectories: ['node_modules', 'shared'],
@@ -33,11 +31,11 @@ module.exports = {
     loaders: [
       {
         test: /\.css?$/,
-        loader: ExtractTextPlugin.extract("style-loader", "css-loader!autoprefixer-loader")
+        loader: 'style-loader!css-loader!postcss-loader'
       },
       {
         test: /\.less?$/,
-        loader: ExtractTextPlugin.extract("style-loader", "css-loader!autoprefixer-loader!less-loader")
+        loader: 'style-loader!css-loader!postcss-loader!less-loader'
       },
       {
         test: /\.jsx?$/,

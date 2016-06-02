@@ -1,0 +1,256 @@
+@width: 1920px;
+@height: 1080px;
+@headerElemWidth: @width * 0.25;
+@headerElemHeight: 40px;
+@smallWidth: @width * 0.04;
+@nameWidth: @width * 0.3;
+@medicWidth: @width * 0.2;
+@obsWidth: @width * 0.14;
+
+@darkerBlue: #233269;
+@thinBlue: #7481ae;
+@gray: #666;
+@previsaoColor: #eb3134;
+@scpColor: #00afee;
+@riscoQuedaColor: #00a95a;
+@alergiaColor: #ea278f;
+@exameColor: #989898;
+@cirurgiaColor: #f38634;
+@jejumColor: #85706d;
+@precaucaoColor: #ffcc28;
+
+@rowElemHeight: (@height - 2 * @headerElemHeight) / 20;
+
+// LEFT OFFSETS
+
+@nameOffset: @smallWidth;
+@medicOffset: @nameOffset + @nameWidth;
+@obsOffset: @medicOffset + @medicWidth;
+@previsaoOffset: @obsOffset + @obsWidth;
+@scpOffset: @previsaoOffset + @smallWidth;
+@riscoQuedaOffset: @scpOffset + @smallWidth;
+@alergiaOffset: @riscoQuedaOffset + @smallWidth;
+@exameOffset: @alergiaOffset + @smallWidth;
+@cirurgiaOffset: @exameOffset + @smallWidth;
+@jejumOffset: @cirurgiaOffset + @smallWidth;
+@precaucaoOffset: @jejumOffset + @smallWidth;
+
+
+.panel {
+  position: relative;
+}
+
+.panel__header {
+  position: fixed;
+  width: 100%;
+  height: @headerElemHeight * 2;
+}
+
+.header__elem {
+  position: absolute;
+  height: @headerElemHeight;
+  color: #fff;
+  line-height: @headerElemHeight;
+  padding-left: @width * 0.004;
+  border: 1px solid #fff;
+}
+
+.header__elem--small {
+  font-size: 10px;
+  text-align: center;
+  padding: 0;
+}
+
+.header__elem--data {
+  width: @headerElemWidth;
+  top: 0;
+  left: 0;
+  font-size: 30px;
+  color: @gray;
+  text-align: left;
+}
+
+.header__elem--title {
+  width: @headerElemWidth * 2;
+  top: 0;
+  left: @headerElemWidth;
+  background-color: @darkerBlue;
+  text-align: center;
+  font-size: 35px;
+  padding: 0;
+}
+
+.header__elem--logo {
+  width: @headerElemWidth;
+  left: @headerElemWidth * 3;
+  text-align: center;
+}
+
+.header__elem--leito {
+  width: @smallWidth;
+  top: @headerElemHeight;
+  left: 0;
+  background-color: @thinBlue;
+}
+
+.header__elem--name {
+  width: @nameWidth;
+  top: @headerElemHeight;
+  left: @nameOffset;
+  background-color: @darkerBlue;
+}
+
+.header__elem--medic {
+  width: @medicWidth;
+  top: @headerElemHeight;
+  left: @medicOffset;
+  background-color: @thinBlue;
+}
+
+.header__elem--obs {
+  width: @obsWidth;
+  top: @headerElemHeight;
+  left: @obsOffset;
+  background-color: @darkerBlue;
+}
+
+.header__elem--previsao {
+  width: @smallWidth;
+  top: @headerElemHeight;
+  left: @previsaoOffset;
+  background-color: @previsaoColor;
+}
+
+.header__elem--scp {
+  width: @smallWidth;
+  top: @headerElemHeight;
+  left: @scpOffset;
+  background-color: @scpColor;
+}
+
+.header__elem--riscoQueda {
+  width: @smallWidth;
+  top: @headerElemHeight;
+  left: @riscoQuedaOffset;
+  background-color: @riscoQuedaColor;
+}
+
+.header__elem--alergia {
+  width: @smallWidth;
+  top: @headerElemHeight;
+  left: @alergiaOffset;
+  background-color: @alergiaColor;
+}
+
+.header__elem--exame {
+  width: @smallWidth;
+  top: @headerElemHeight;
+  left: @exameOffset;
+  background-color: @exameColor;
+}
+
+.header__elem--cirurgia {
+  width: @smallWidth;
+  top: @headerElemHeight;
+  left: @cirurgiaOffset;
+  background-color: @cirurgiaColor;
+}
+
+.header__elem--jejum {
+  width: @smallWidth;
+  top: @headerElemHeight;
+  left: @jejumOffset;
+  background-color: @jejumColor;
+}
+
+.header__elem--precaucao {
+  width: @smallWidth;
+  top: @headerElemHeight;
+  left: @precaucaoOffset;
+  background-color: @precaucaoColor;
+}
+
+.panel__body {
+  position: absolute;
+  top: @headerElemHeight * 2;
+  left: 0;
+  height: @rowElemHeight * 20;
+  width: 100%;
+  overflow: hidden;
+}
+
+.panel__body__row {
+  height: @rowElemHeight;
+}
+
+.panel__body__row--zebra {
+  background-color: #ddd;
+}
+
+.panel__body__row__elem {
+  padding-left: @width * 0.004;
+  font-size: 20px;
+  height: @rowElemHeight;
+  line-height: @rowElemHeight;
+  position: absolute;
+}
+
+.panel__body__row__elem--small {
+  width: @smallWidth;
+  font-size: 12px;
+}
+
+.panel__body__row__elem--name {
+  width: @nameWidth;
+  left: @nameOffset
+}
+
+.panel__body__row__elem--medic {
+  width: @medicWidth;
+  left: @medicOffset;
+}
+
+.panel__body__row__elem--obs {
+  width: @obsWidth;
+  left: @obsOffset;
+}
+
+.panel__body__row__elem--previsao {
+  width: @smallWidth;
+  left: @previsaoOffset;
+}
+
+.panel__body__row__elem--scp {
+  width: @smallWidth;
+  left: @scpOffset;
+}
+
+.panel__body__row__elem--riscoQueda {
+  width: @smallWidth;
+  left: @riscoQuedaOffset;
+}
+
+.panel__body__row__elem--alergia {
+  width: @smallWidth;
+  left: @alergiaOffset;
+}
+
+.panel__body__row__elem--exame {
+  width: @smallWidth;
+  left: @exameOffset;
+}
+
+.panel__body__row__elem--cirurgia {
+  width: @smallWidth;
+  left: @cirurgiaOffset;
+}
+
+.panel__body__row__elem--jejum {
+  width: @smallWidth;
+  left: @jejumOffset;
+}
+
+.panel__body__row__elem--precaucao {
+  width: @smallWidth;
+  left: @precaucaoOffset;
+}

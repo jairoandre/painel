@@ -421,79 +421,187 @@ table {
 td,
 th {
     padding: 0;
-}.painelTb {
-  border-collapse: collapse;
+}.panel {
+  position: relative;
 }
-.painelTb__data {
+.panel__header {
+  position: fixed;
+  width: 100%;
+  height: 80px;
+}
+.header__elem {
+  position: absolute;
+  height: 40px;
+  color: #fff;
+  line-height: 40px;
+  padding-left: 7.68px;
+  border: 1px solid #fff;
+}
+.header__elem--small {
+  font-size: 10px;
+  text-align: center;
+  padding: 0;
+}
+.header__elem--data {
+  width: 480px;
+  top: 0;
+  left: 0;
   font-size: 30px;
   color: #666;
-  padding: 15px;
   text-align: left;
 }
-.painelTb__setor {
+.header__elem--title {
+  width: 960px;
+  top: 0;
+  left: 480px;
   background-color: #233269;
   text-align: center;
-  vertical-align: middle;
   font-size: 35px;
-  color: #fff;
-  padding: 15px;
+  padding: 0;
 }
-.painelTb__th {
-  font-size: 15px;
-  padding: 15px;
-  font-weight: bold;
+.header__elem--logo {
+  width: 480px;
+  left: 1440px;
+  text-align: center;
+}
+.header__elem--leito {
+  width: 76.8px;
+  top: 40px;
+  left: 0;
   background-color: #7481ae;
-  color: #fff;
-  border: 1px solid #ffffff;
 }
-.painelTb__th--darker {
+.header__elem--name {
+  width: 576px;
+  top: 40px;
+  left: 76.8px;
   background-color: #233269;
 }
-.painelTb__th--left {
-  text-align: left;
+.header__elem--medic {
+  width: 384px;
+  top: 40px;
+  left: 652.8px;
+  background-color: #7481ae;
 }
-.painelTb__th--previsao {
-  font-size: 8px;
+.header__elem--obs {
+  width: 268.8px;
+  top: 40px;
+  left: 1036.8px;
+  background-color: #233269;
+}
+.header__elem--previsao {
+  width: 76.8px;
+  top: 40px;
+  left: 1305.6px;
   background-color: #eb3134;
-  width: 5%;
-  text-align: center;
 }
-.painelTb__th--detalhe {
-  font-size: 10px;
-  text-align: center;
-  vertical-align: middle;
-  width: 5%;
-  font-size: 8px;
-}
-.painelTb__th--scp {
+.header__elem--scp {
+  width: 76.8px;
+  top: 40px;
+  left: 1382.4px;
   background-color: #00afee;
 }
-.painelTb__th--queda {
+.header__elem--riscoQueda {
+  width: 76.8px;
+  top: 40px;
+  left: 1459.2px;
   background-color: #00a95a;
 }
-.painelTb__th--alergia {
+.header__elem--alergia {
+  width: 76.8px;
+  top: 40px;
+  left: 1536px;
   background-color: #ea278f;
 }
-.painelTb__th--exame {
+.header__elem--exame {
+  width: 76.8px;
+  top: 40px;
+  left: 1612.8px;
   background-color: #989898;
 }
-.painelTb__th--cirurgia {
+.header__elem--cirurgia {
+  width: 76.8px;
+  top: 40px;
+  left: 1689.6px;
   background-color: #f38634;
 }
-.painelTb__th--jejum {
+.header__elem--jejum {
+  width: 76.8px;
+  top: 40px;
+  left: 1766.4px;
   background-color: #85706d;
 }
-.painelTb__th--precaucao {
+.header__elem--precaucao {
+  width: 76.8px;
+  top: 40px;
+  left: 1843.2px;
   background-color: #ffcc28;
 }
-.painelTb__tr {
-  background-color: #f0f0f0;
+.panel__body {
+  position: absolute;
+  top: 80px;
+  left: 0;
+  height: 1000px;
+  width: 100%;
+  overflow: hidden;
 }
-.painelTb__tr--zebra {
-  background-color: #ffffff;
+.panel__body__row {
+  height: 50px;
 }
-.painelTb__td {
-  text-align: left;
-  padding: 15px;
-  font-size: 10px;
+.panel__body__row--zebra {
+  background-color: #ddd;
+}
+.panel__body__row__elem {
+  padding-left: 7.68px;
+  font-size: 20px;
+  height: 50px;
+  line-height: 50px;
+  position: absolute;
+}
+.panel__body__row__elem--small {
+  width: 76.8px;
+  font-size: 12px;
+}
+.panel__body__row__elem--name {
+  width: 576px;
+  left: 76.8px;
+}
+.panel__body__row__elem--medic {
+  width: 384px;
+  left: 652.8px;
+}
+.panel__body__row__elem--obs {
+  width: 268.8px;
+  left: 1036.8px;
+}
+.panel__body__row__elem--previsao {
+  width: 76.8px;
+  left: 1305.6px;
+}
+.panel__body__row__elem--scp {
+  width: 76.8px;
+  left: 1382.4px;
+}
+.panel__body__row__elem--riscoQueda {
+  width: 76.8px;
+  left: 1459.2px;
+}
+.panel__body__row__elem--alergia {
+  width: 76.8px;
+  left: 1536px;
+}
+.panel__body__row__elem--exame {
+  width: 76.8px;
+  left: 1612.8px;
+}
+.panel__body__row__elem--cirurgia {
+  width: 76.8px;
+  left: 1689.6px;
+}
+.panel__body__row__elem--jejum {
+  width: 76.8px;
+  left: 1766.4px;
+}
+.panel__body__row__elem--precaucao {
+  width: 76.8px;
+  left: 1843.2px;
 }

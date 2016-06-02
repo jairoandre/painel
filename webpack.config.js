@@ -25,11 +25,11 @@ module.exports = {
     loaders: [
       {
         test: /\.css?$/,
-        loader: ExtractTextPlugin.extract("style-loader", "css-loader!autoprefixer-loader")
+        loader: ExtractTextPlugin.extract("style-loader", "css-loader!postcss-loader")
       },
       {
         test: /\.less?$/,
-        loader: ExtractTextPlugin.extract("style-loader", "css-loader!autoprefixer-loader!less-loader")
+        loader: ExtractTextPlugin.extract("style-loader", "css-loader!postcss-loader!less-loader")
       },
       {
         test: /\.jsx?$/,
