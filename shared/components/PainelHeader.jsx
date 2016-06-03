@@ -13,7 +13,7 @@ export default class PainelHeader extends React.Component {
                     {unidade}
                 </div>
                 <div className="header__elem header__elem--logo">
-                    <img src="/imgs/logo.png" width="200px"/>
+                    <img src="/imgs/logo.png" width="180px"/>
                 </div>
                 <div className="header__elem header__elem--leito">
                     APTO
@@ -22,7 +22,10 @@ export default class PainelHeader extends React.Component {
                     NOME DO PACIENTE
                 </div>
                 <div className="header__elem header__elem--medic">
-                    MÉDICO
+                    MÉDICO ASSISTENTE
+                </div>
+                <div className="header__elem header__elem--convenio">
+                    CONVÊNIO
                 </div>
                 <div className="header__elem header__elem--obs">
                     OBSERVAÇÃO
@@ -35,6 +38,9 @@ export default class PainelHeader extends React.Component {
                 </div>
                 <div className="header__elem header__elem--small header__elem--riscoQueda">
                     RISCO DE QUEDA
+                </div>
+                <div className="header__elem header__elem--small header__elem--ulceraPressao">
+                    ÚLCERA POR PRESSÃO
                 </div>
                 <div className="header__elem header__elem--small header__elem--alergia">
                     ALERGIA

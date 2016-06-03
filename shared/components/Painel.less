@@ -1,35 +1,41 @@
 @width: 1920px;
 @height: 1080px;
-@headerElemWidth: @width * 0.25;
+@headerElemWidth: @width * 0.15;
+@titleElemWidth: @width - 2 * @headerElemWidth;
 @headerElemHeight: 40px;
 @smallWidth: @width * 0.04;
-@nameWidth: @width * 0.3;
-@medicWidth: @width * 0.2;
-@obsWidth: @width * 0.14;
+@leitoWidth: @width * 0.05;
+@nameWidth: @width * 0.24;
+@medicWidth: @width * 0.15;
+@convenioWidth: @width * 0.08;
+@obsWidth: @width * 0.12;
 
 @darkerBlue: #233269;
 @thinBlue: #7481ae;
-@gray: #666;
+@gray: #4a4a4a;
 @previsaoColor: #eb3134;
 @scpColor: #00afee;
 @riscoQuedaColor: #00a95a;
+@ulceraPressaoColor: #a95b41;
 @alergiaColor: #ea278f;
 @exameColor: #989898;
 @cirurgiaColor: #f38634;
 @jejumColor: #85706d;
-@precaucaoColor: #ffcc28;
+@precaucaoColor: #4b3f9d;
 
 @rowElemHeight: (@height - 2 * @headerElemHeight) / 20;
 
 // LEFT OFFSETS
 
-@nameOffset: @smallWidth;
+@nameOffset: @leitoWidth;
 @medicOffset: @nameOffset + @nameWidth;
-@obsOffset: @medicOffset + @medicWidth;
+@convenioOffset: @medicOffset + @medicWidth;
+@obsOffset: @convenioOffset + @convenioWidth;
 @previsaoOffset: @obsOffset + @obsWidth;
 @scpOffset: @previsaoOffset + @smallWidth;
 @riscoQuedaOffset: @scpOffset + @smallWidth;
-@alergiaOffset: @riscoQuedaOffset + @smallWidth;
+@ulceraPressaoOffset: @riscoQuedaOffset + @smallWidth;
+@alergiaOffset: @ulceraPressaoOffset + @smallWidth;
 @exameOffset: @alergiaOffset + @smallWidth;
 @cirurgiaOffset: @exameOffset + @smallWidth;
 @jejumOffset: @cirurgiaOffset + @smallWidth;
@@ -44,11 +50,13 @@
   position: fixed;
   width: 100%;
   height: @headerElemHeight * 2;
+  z-index: 999;
 }
 
 .header__elem {
   position: absolute;
   height: @headerElemHeight;
+  background-color: #fff;
   color: #fff;
   line-height: @headerElemHeight;
   padding-left: @width * 0.004;
@@ -71,7 +79,7 @@
 }
 
 .header__elem--title {
-  width: @headerElemWidth * 2;
+  width: @titleElemWidth;
   top: 0;
   left: @headerElemWidth;
   background-color: @darkerBlue;
@@ -82,12 +90,13 @@
 
 .header__elem--logo {
   width: @headerElemWidth;
-  left: @headerElemWidth * 3;
+  left: @headerElemWidth + @titleElemWidth;
   text-align: center;
+  background-color: #fff;
 }
 
 .header__elem--leito {
-  width: @smallWidth;
+  width: @leitoWidth;
   top: @headerElemHeight;
   left: 0;
   background-color: @thinBlue;
@@ -97,7 +106,7 @@
   width: @nameWidth;
   top: @headerElemHeight;
   left: @nameOffset;
-  background-color: @darkerBlue;
+  background-color: @thinBlue;
 }
 
 .header__elem--medic {
@@ -107,11 +116,18 @@
   background-color: @thinBlue;
 }
 
+.header__elem--convenio {
+  width: @convenioWidth;
+  top: @headerElemHeight;
+  left: @convenioOffset;
+  background-color: @thinBlue;
+}
+
 .header__elem--obs {
   width: @obsWidth;
   top: @headerElemHeight;
   left: @obsOffset;
-  background-color: @darkerBlue;
+  background-color: @thinBlue;
 }
 
 .header__elem--previsao {
@@ -119,6 +135,7 @@
   top: @headerElemHeight;
   left: @previsaoOffset;
   background-color: @previsaoColor;
+  line-height: @headerElemHeight / 2;
 }
 
 .header__elem--scp {
@@ -133,6 +150,15 @@
   top: @headerElemHeight;
   left: @riscoQuedaOffset;
   background-color: @riscoQuedaColor;
+  line-height: @headerElemHeight / 2;
+}
+
+.header__elem--ulceraPressao {
+  width: @smallWidth;
+  top: @headerElemHeight;
+  left: @ulceraPressaoOffset;
+  background-color: @ulceraPressaoColor;
+  line-height: @headerElemHeight / 2;
 }
 
 .header__elem--alergia {
@@ -181,24 +207,35 @@
 
 .panel__body__row {
   height: @rowElemHeight;
-  width: 100%;
+  width: @width;
 }
 
 .panel__body__row--zebra {
-  background-color: #bedadd;
+  background-color: #dffcff;
 }
 
 .panel__body__row__elem {
   padding-left: @width * 0.004;
-  font-size: 20px;
+  font-size: 18px;
   height: @rowElemHeight;
   line-height: @rowElemHeight;
   position: absolute;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+
+.panel__body__row__elem--leito {
+  width: @leitoWidth;
+  font-size: 18px;
+  font-weight: bold;
+  font-style: oblique
 }
 
 .panel__body__row__elem--small {
   width: @smallWidth;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .panel__body__row__elem--name {
@@ -209,6 +246,11 @@
 .panel__body__row__elem--medic {
   width: @medicWidth;
   left: @medicOffset;
+}
+
+.panel__body__row__elem--convenio {
+  width: @convenioWidth;
+  left: @convenioOffset;
 }
 
 .panel__body__row__elem--obs {
@@ -224,11 +266,22 @@
 .panel__body__row__elem--scp {
   width: @smallWidth;
   left: @scpOffset;
+  text-align: center;
+  padding: 0;
+  transform: scale(0.8);
 }
 
 .panel__body__row__elem--riscoQueda {
   width: @smallWidth;
   left: @riscoQuedaOffset;
+  text-align: center;
+  padding: 0;
+  transform: scale(0.8);
+}
+
+.panel__body__row__elem--ulceraPressao {
+  width: @smallWidth;
+  left: @ulceraPressaoOffset;
 }
 
 .panel__body__row__elem--alergia {
