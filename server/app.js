@@ -1,6 +1,7 @@
 import express from 'express';
 import path from 'path';
 import http from 'http';
+var colors = require('colors/safe');
 
 import React from 'react';
 import ReactDOM from 'react-dom/server';
@@ -19,21 +20,25 @@ var app;
 var httpServer;
 var openHttpConnections = {};
 
-process.on('uncaughtException', function(err) {
+process.on('uncaughtException', function (err) {
   console.error('Uncaught exception ', err);
-  shutdown();
+  if (!process.env.MOCK) {
+    shutdown();
+  }
 });
 
 process.on('SIGTERM', function () {
   console.log('Received SIGTERM');
-
-  shutdown();
+  if (!process.env.MOCK) {
+    shutdown();
+  }
 });
 
 process.on('SIGINT', function () {
   console.log('Received SIGINT');
-
-  shutdown();
+  if (!process.env.MOCK) {
+    shutdown();
+  }
 });
 
 initApp();
@@ -77,9 +82,9 @@ function initApp() {
       }
 
       const InitialComponent = (
-          <Provider store={store}>
-            <RouterContext {...renderProps} />
-          </Provider>
+        <Provider store={store}>
+          <RouterContext {...renderProps} />
+        </Provider>
       );
 
       const initialState = store.getState();
@@ -108,36 +113,47 @@ function initApp() {
     });
   });
 
-  httpServer.on('connection', function(conn) {
-    var key = conn.remoteAddress + ':' + (conn.remotePort || '');
-
-    openHttpConnections[key] = conn;
-
-    conn.on('close', function() {
-      delete openHttpConnections[key];
+  if (process.env.MOCK) {
+    console.log('RUNNING ON ' + colors.rainbow('MOCK') + ' MODE');
+    console.log('-------------------------------------------');
+    const PORT = process.env.PORT || 3000;
+    httpServer.listen(PORT, function () {
+      console.log(`==> 🌎  Listening on port ${PORT}. Open up http://localhost:${PORT}/ in your browser.`);
     });
-  });
+  } else {
+    httpServer.on('connection', function (conn) {
+      var key = conn.remoteAddress + ':' + (conn.remotePort || '');
 
-  database.addBuildupSql({
-    sql: "BEGIN EXECUTE IMMEDIATE q'[alter session set NLS_DATE_FORMAT='DD-MM-YYYY']'; END;"
-  });
+      openHttpConnections[key] = conn;
 
-  database.addTeardownSql({
-    sql: "BEGIN sys.dbms_session.modify_package_state(sys.dbms_session.reinitialize); END;"
-  });
+      conn.on('close', function () {
+        delete openHttpConnections[key];
+      });
+    });
 
-  database.createPool(dbconfig)
-      .then(function() {
+    database.addBuildupSql({
+      sql: "BEGIN EXECUTE IMMEDIATE q'[alter session set NLS_DATE_FORMAT='DD-MM-YYYY']'; END;"
+    });
+
+    database.addTeardownSql({
+      sql: "BEGIN sys.dbms_session.modify_package_state(sys.dbms_session.reinitialize); END;"
+    });
+
+    database.createPool(dbconfig)
+      .then(function () {
         const PORT = process.env.PORT || 3000;
-        httpServer.listen(PORT, function() {
+        httpServer.listen(PORT, function () {
           console.log(`==> 🌎  Listening on port ${PORT}. Open up http://localhost:${PORT}/ in your browser.`);
         });
       })
-      .catch(function(err) {
+      .catch(function (err) {
         console.error('Error occurred creating database connection pool', err);
         console.log('Exiting process');
         process.exit(0);
       });
+  }
+
+
 }
 
 function shutdown() {
@@ -148,16 +164,16 @@ function shutdown() {
     console.log('Web server closed');
 
     database.terminatePool()
-        .then(function() {
-          console.log('node-oracledb connection pool terminated');
-          console.log('Exiting process');
-          process.exit(0);
-        })
-        .catch(function(err) {
-          console.error('Error occurred while terminating node-oracledb connection pool', err);
-          console.log('Exiting process');
-          process.exit(0);
-        });
+      .then(function () {
+        console.log('node-oracledb connection pool terminated');
+        console.log('Exiting process');
+        process.exit(0);
+      })
+      .catch(function (err) {
+        console.error('Error occurred while terminating node-oracledb connection pool', err);
+        console.log('Exiting process');
+        process.exit(0);
+      });
   });
 
   for (key in openHttpConnections) {

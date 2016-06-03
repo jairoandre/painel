@@ -1,100 +1,109 @@
 import {combineReducers} from 'redux'
 import {
-    SELECT_UNIDADE, INVALIDATE_UNIDADE,
-    REQUEST_PACIENTES, RECEIVE_PACIENTES,
-    REQUEST_PREVISAO_ALTA, RECEIVE_PREVISAO_ALTA, SHUFFLE_PACIENTES
+  SELECT_UNIDADE, INVALIDATE_UNIDADE,
+  REQUEST_PACIENTES, RECEIVE_PACIENTES,
+  REQUEST_PREVISAO_ALTA, RECEIVE_PREVISAO_ALTA, SHUFFLE_PACIENTES
 } from '../actions'
 import { shuffle } from 'lodash';
 
 function selectedUnidade(state = '', action) {
-    switch (action.type) {
-        case SELECT_UNIDADE:
-            return action.unidade
-        default:
-            return state
-    }
+  switch (action.type) {
+    case SELECT_UNIDADE:
+      return action.unidade
+    default:
+      return state
+  }
 }
 
 function pacientes(state = {
-    isFetching: false,
-    didInvalidate: false,
-    items: []
+  isFetching: false,
+  didInvalidate: false,
+  items: []
 }, action) {
-    switch (action.type) {
-        case INVALIDATE_UNIDADE:
-            return Object.assign({}, state, {
-                didInvalidate: true
-            })
-        case REQUEST_PACIENTES:
-            return Object.assign({}, state, {
-                isFetching: true,
-                didInvalidate: false
-            })
-        case RECEIVE_PACIENTES:
-            return Object.assign({}, state, {
-                isFetching: false,
-                didInvalidate: false,
-                items: action.pacientes,
-                lastUpdated: action.receivedAt
-            })
-        case SHUFFLE_PACIENTES:
-            console.log(action.pacientes);
-            console.log(action.unidade);
-            return {...state, items: shuffle(action.pacientes)}
-        default:
-            return state
-    }
+  switch (action.type) {
+    case INVALIDATE_UNIDADE:
+      return Object.assign({}, state, {
+        didInvalidate: true
+      })
+    case REQUEST_PACIENTES:
+      return Object.assign({}, state, {
+        isFetching: true,
+        didInvalidate: false
+      })
+    case RECEIVE_PACIENTES:
+      return Object.assign({}, state, {
+        isFetching: false,
+        didInvalidate: false,
+        items: action.pacientes,
+        lastUpdated: action.receivedAt
+      })
+    case SHUFFLE_PACIENTES:
+
+      let itemsLength = state.items.length;
+
+      let cycledItems = state.items.map((item) => {
+        let newI = item.i - 10;
+        if (newI < 0) {
+          newI += itemsLength;
+        }
+        return {...item, i: newI}
+      });
+
+      return {...state, items: cycledItems}
+    default:
+      return state
+  }
 }
 
 function pacientesByUnidade(state = {}, action) {
-    switch (action.type) {
-        case INVALIDATE_UNIDADE:
-        case RECEIVE_PACIENTES:
-        case REQUEST_PACIENTES:
-        case SHUFFLE_PACIENTES:
-            return Object.assign({}, state, {
-                [action.unidade]: pacientes(state[action.unidade], action)
-            })
-        default:
-            return state
-    }
+  switch (action.type) {
+    case INVALIDATE_UNIDADE:
+    case RECEIVE_PACIENTES:
+    case REQUEST_PACIENTES:
+    case SHUFFLE_PACIENTES:
+      return Object.assign({}, state, {
+        [action.unidade]: pacientes(state[action.unidade], action)
+      })
+    default:
+      return state;
+  }
 }
 
 function previsaoAlta(state = {
-    isFetching: false,
-    didInvalidate: false,
-    previsaoAlta: {}
+  isFetching: false,
+  didInvalidate: false,
+  previsaoAlta: {}
 }, action) {
-    switch (action.type) {
-        case REQUEST_PREVISAO_ALTA:
-            return {...state, isFetching: true, didInvalidate: false};
-        case RECEIVE_PREVISAO_ALTA:
-            return {
-                ...state,
-                isFetching: false,
-                didInvalidate: false,
-                previsaoAlta: action.previsaoAlta,
-                lastUpdated: action.receivedAt
-            }
-        default:
-            return state;
-    }
+  switch (action.type) {
+    case REQUEST_PREVISAO_ALTA:
+      return {...state, isFetching: true, didInvalidate: false};
+    case RECEIVE_PREVISAO_ALTA:
+      return {
+        ...state,
+        isFetching: false,
+        didInvalidate: false,
+        previsaoAlta: action.previsaoAlta,
+        lastUpdated: action.receivedAt
+      }
+    default:
+      return state;
+  }
 }
 
 function previsaoAltaByAtendimento(state = {}, action) {
-    switch (action.type) {
-        case RECEIVE_PREVISAO_ALTA:
-        case REQUEST_PREVISAO_ALTA:
-            return {...state, [action.atendimento]: previsaoAlta(state[action.atendimento], action)};
-        default:
-            return state
-    }
+  switch (action.type) {
+    case RECEIVE_PREVISAO_ALTA:
+    case REQUEST_PREVISAO_ALTA:
+      return {...state, [action.atendimento]: previsaoAlta(state[action.atendimento], action)};
+    default:
+      return state
+  }
 }
 
 const rootReducer = combineReducers({
-    previsaoAltaByAtendimento,
-    pacientesByUnidade,
-    selectedUnidade
+  previsaoAltaByAtendimento,
+  pacientesByUnidade,
+  selectedUnidade
 })
 
 export default rootReducer;
