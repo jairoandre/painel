@@ -16,6 +16,8 @@ const api = require('./api');
 const database = require('./oracle/database.js');
 const dbconfig = require('./oracle/dbconfig.js');
 
+const bodyParser = require('body-parser');
+
 var app;
 var httpServer;
 var openHttpConnections = {};
@@ -48,6 +50,9 @@ function initApp() {
   httpServer = http.Server(app);
 
   var apiRouter = api.getRouter();
+
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({extended: true}));
 
   app.use('/api', apiRouter);
 

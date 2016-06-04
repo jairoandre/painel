@@ -16,6 +16,8 @@ function getRouter () {
   router.route('/riscoQueda/:atendimento')
     .get(getRiscoQueda);
 
+    router.route('/teste').post(postTeste);
+
   return router;
 }
 
@@ -158,4 +160,8 @@ function getRiscoQueda (req, res, next) {
         next(err);
       });
   }
+}
+
+function postTeste (req, res, next) {
+  res.send(req.body.teste);
 }
