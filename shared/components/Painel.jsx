@@ -17,12 +17,12 @@ export default class Painel extends React.Component {
   renderPacientes() {
     const { pacientes } = this.props;
     return pacientes.map((paciente, key) =>
-      <Motion defaultStyle={{y: 0}} style={{y: spring(+50 * paciente.i, {stiffness: 120, damping: 17})}} key={key}>
+      <Motion defaultStyle={{y: 0}} style={{y: spring(50 * paciente.i, {stiffness: 160, damping: 17})}} key={key}>
         {(style) =>
           <div className={(paciente.i % 2 === 0) ? 'panel__body__row' : 'panel__body__row panel__body__row--zebra'}
                style={{
           position: 'absolute',
-          transform: `translate3d(0, ${style.y}px, 0)`
+          transform: `translate3d(0, ${style.y}px, ${style.y}px)`
           }}>
             <PainelRow paciente={paciente} key={key} index={key}/>
           </div>

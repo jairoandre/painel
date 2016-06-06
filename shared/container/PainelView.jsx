@@ -71,7 +71,7 @@ function mapStateToProps (state) {
     selectedUnidade,
     pacientes,
     isFetching,
-  lastUpdated};
+    lastUpdated};
 }
 
 function mapDispatchToProps (dispatch) {

@@ -16,7 +16,7 @@ function getRouter () {
   router.route('/riscoQueda/:atendimento')
     .get(getRiscoQueda);
 
-    router.route('/teste').post(postTeste);
+  router.route('/teste').post(postTeste);
 
   return router;
 }

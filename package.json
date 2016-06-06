@@ -12,7 +12,8 @@
     "mock": "set MOCK=true && npm run prod",
     "dev-server": "node server/webpack",
     "dev-runner": "nodemon server/runner",
-    "dev": "./node_modules/.bin/npm-run-all --parallel dev-server dev-runner"
+    "dev": "./node_modules/.bin/npm-run-all --parallel dev-server dev-runner",
+    "mock-dev": "set MOCK=true && npm run dev"
   },
   "author": "jairoportela",
   "license": "MIT",
