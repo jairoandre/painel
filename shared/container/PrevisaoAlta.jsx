@@ -22,7 +22,7 @@ class PrevisaoAlta extends Component {
 
     let dateStr = 'N/A';
 
-    if (obj) {
+    if (obj && obj.previsaoAlta) {
       dateStr = moment(obj.previsaoAlta).format('DD/MM/YYYY');
     }
 

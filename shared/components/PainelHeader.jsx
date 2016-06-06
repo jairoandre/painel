@@ -2,60 +2,67 @@ import React from 'react';
 
 export default class PainelHeader extends React.Component {
 
+  renderHeaderElem(value) {
+    return `header__elem header__elem--${value}`;
+  }
+
+  renderHeaderSmallElem(value) {
+    return `header__elem header__elem--small header__elem--${value}`;
+  }
+
   render () {
     const {unidade, data} = this.props;
     return (
     <div className='panel__header'>
-      <div className='header__elem header__elem--data'>
-        Data:
-        {data}
+      <div className={this.renderHeaderElem('data')}>
+        Data: {data}
       </div>
-      <div className='header__elem header__elem--title'>
+      <div className={this.renderHeaderElem('title')}>
         {unidade}
       </div>
-      <div className='header__elem header__elem--logo'>
+      <div className={this.renderHeaderElem('logo')}>
         <img src='/imgs/logo.png' width='180px' />
       </div>
-      <div className='header__elem header__elem--leito'>
+      <div className={this.renderHeaderElem('leito')}>
         APTO
       </div>
-      <div className='header__elem header__elem--name'>
+      <div className={this.renderHeaderElem('name')}>
         NOME DO PACIENTE
       </div>
-      <div className='header__elem header__elem--medic'>
+      <div className={this.renderHeaderElem('medic')}>
         MÉDICO ASSISTENTE
       </div>
-      <div className='header__elem header__elem--convenio'>
+      <div className={this.renderHeaderElem('convenio')}>
         CONVÊNIO
       </div>
-      <div className='header__elem header__elem--obs'>
+      <div className={this.renderHeaderElem('obs')}>
         OBSERVAÇÃO
       </div>
-      <div className='header__elem header__elem--small header__elem--previsao'>
+      <div className={this.renderHeaderSmallElem('previsao')}>
         PREVISÃO DE ALTA
       </div>
-      <div className='header__elem header__elem--small header__elem--scp'>
+      <div className={this.renderHeaderSmallElem('scp')}>
         SCP
       </div>
-      <div className='header__elem header__elem--small header__elem--riscoQueda'>
+      <div className={this.renderHeaderSmallElem('riscoQueda')}>
         RISCO DE QUEDA
       </div>
-      <div className='header__elem header__elem--small header__elem--ulceraPressao'>
+      <div className={this.renderHeaderSmallElem('ulceraPressao')}>
         ÚLCERA POR PRESSÃO
       </div>
-      <div className='header__elem header__elem--small header__elem--alergia'>
+      <div className={this.renderHeaderSmallElem('alergia')}>
         ALERGIA
       </div>
-      <div className='header__elem header__elem--small header__elem--exame'>
+      <div className={this.renderHeaderSmallElem('exame')}>
         EXAME
       </div>
-      <div className='header__elem header__elem--small header__elem--cirurgia'>
+      <div className={this.renderHeaderSmallElem('cirurgia')}>
         CIRURGIA
       </div>
-      <div className='header__elem header__elem--small header__elem--jejum'>
+      <div className={this.renderHeaderSmallElem('jejum')}>
         JEJUM
       </div>
-      <div className='header__elem header__elem--small header__elem--precaucao'>
+      <div className={this.renderHeaderSmallElem('precaucao')}>
         PRECAUÇÃO
       </div>
     </div>

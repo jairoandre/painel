@@ -5,6 +5,8 @@ export const INVALIDATE_UNIDADE = 'INVALIDATE_UNIDADE';
 export const REQUEST_PACIENTES = 'REQUEST_PACIENTES';
 export const RECEIVE_PACIENTES = 'RECEIVE_PACIENTES';
 export const SHUFFLE_PACIENTES = 'SHUFFLE_PACIENTES';
+export const REQUEST_PREVISOES = 'REQUEST_PREVISOES';
+export const RECEIVE_PREVISOES = 'RECEIVE_PREVISOES';
 
 export function shufflePacientes(unidade) {
   return {
@@ -12,7 +14,6 @@ export function shufflePacientes(unidade) {
     unidade
   }
 }
-
 
 export function selectUnidade(unidade) {
   return {
@@ -28,12 +29,23 @@ export function invalidateUnidade(unidade) {
   }
 }
 
+// REQUEST's
+
 function requestPacientes(unidade) {
   return {
     type: REQUEST_PACIENTES,
     unidade
   }
 }
+
+function requestPrevisoes(unidade) {
+  return {
+    type: REQUEST_PREVISOES,
+    unidade
+  }
+}
+
+// RECEIVER's
 
 function receivePacientes(unidade, pacientes) {
   return {
@@ -44,12 +56,34 @@ function receivePacientes(unidade, pacientes) {
   }
 }
 
+function receivePrevisoes(unidade, previsoes) {
+  return {
+    type: RECEIVE_PREVISOES,
+    unidade,
+    previsoes
+  }
+}
+
+// FETCH's
+
 function fetchPacientes(unidade) {
   return dispatch => {
     dispatch(requestPacientes(unidade))
     return fetch(`/api/pacientes/${unidade}`)
       .then(response => response.json())
-      .then(pacientes => dispatch(receivePacientes(unidade, pacientes)))
+      .then(pacientes => {
+        dispatch(receivePacientes(unidade, pacientes))
+        // dispatch(fetchPrevisoes(unidade))
+      });
+  }
+}
+
+function fetchPrevisoes(unidade) {
+  return dispatch => {
+    dispatch(requestPrevisoes(unidade));
+    return fetch(`/api/previsoes/${unidade}`)
+      .then(response => response.json())
+      .then(previsoes => dispatch(receivePrevisoes(unidade, previsoes)));
   }
 }
 

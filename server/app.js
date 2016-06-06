@@ -45,7 +45,7 @@ process.on('SIGINT', function () {
 
 initApp();
 
-function initApp() {
+function initApp () {
   app = express();
   httpServer = http.Server(app);
 
@@ -60,9 +60,11 @@ function initApp() {
 
   app.set('env', process.env.NODE_ENV || 'development');
 
-  if (process.env.NODE_ENV === 'development') {
+  console.log(`NODE ENV: ${app.get('env')}`);
+
+  if (app.get('env') === 'development') {
     app.set('cssInclude', '');
-    app.set('resourceUrlPrefix', 'http://localhost:8080/')
+    app.set('resourceUrlPrefix', 'http://localhost:8080/');
   } else {
     app.set('cssInclude', `<link rel="stylesheet" href="/main.css"/>`);
     app.set('resourceUrlPrefix', '/');
@@ -87,9 +89,9 @@ function initApp() {
       }
 
       const InitialComponent = (
-        <Provider store={store}>
-          <RouterContext {...renderProps} />
-        </Provider>
+      <Provider store={store}>
+        <RouterContext {...renderProps} />
+      </Provider>
       );
 
       const initialState = store.getState();
@@ -141,7 +143,7 @@ function initApp() {
     });
 
     database.addTeardownSql({
-      sql: "BEGIN sys.dbms_session.modify_package_state(sys.dbms_session.reinitialize); END;"
+      sql: 'BEGIN sys.dbms_session.modify_package_state(sys.dbms_session.reinitialize); END;'
     });
 
     database.createPool(dbconfig)
@@ -157,11 +159,9 @@ function initApp() {
         process.exit(0);
       });
   }
-
-
 }
 
-function shutdown() {
+function shutdown () {
   console.log('Shutting down');
   console.log('Closing web server');
 
@@ -186,8 +186,8 @@ function shutdown() {
   }
 }
 
-function handleError(err, req, res, next) {
+function handleError (err, req, res, next) {
   console.error(err);
   res.status(500).send({error: 'An error has occurred, please contact support if the error persists'});
-  shutdown();//process would usually be restarted via something like https://github.com/foreverjs/forever
+  shutdown(); // process would usually be restarted via something like https://github.com/foreverjs/forever
 }

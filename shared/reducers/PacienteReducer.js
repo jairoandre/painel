@@ -1,9 +1,11 @@
 import {
-    SELECT_UNIDADE, INVALIDATE_UNIDADE,
+    SELECT_UNIDADE, INVALIDATE_UNIDADE, SHUFFLE_PACIENTES,
     REQUEST_PACIENTES, RECEIVE_PACIENTES,
-    SHUFFLE_PACIENTES
+    REQUEST_PREVISOES, RECEIVE_PREVISOES
 } from '../actions';
 import {shuffle} from 'lodash';
+
+var moment = require('moment');
 
 export function selectedUnidade(state = '', action) {
     switch (action.type) {
@@ -21,21 +23,35 @@ function pacientes(state = {
 }, action) {
     switch (action.type) {
         case INVALIDATE_UNIDADE:
-            return Object.assign({}, state, {
-                didInvalidate: true
-            });
+            return {...state,
+                didInvalidate: true};
         case REQUEST_PACIENTES:
-            return Object.assign({}, state, {
+            return {...state, 
                 isFetching: true,
                 didInvalidate: false
-            });
+            };
         case RECEIVE_PACIENTES:
-            return Object.assign({}, state, {
+            return {...state,
                 isFetching: false,
                 didInvalidate: false,
                 items: action.pacientes,
                 lastUpdated: action.receivedAt
+            };
+        case REQUEST_PREVISOES:
+            return {...state, isFetching: true};
+        case RECEIVE_PREVISOES:
+
+            let itemsComPrevisao = state.items.map((paciente) => {
+                let previsaoAlta = action.previsoes[paciente.atendimento];
+                let previsaoAltaStr = 'N/A';
+                if (previsaoAlta) {
+                    previsaoAltaStr = moment(previsaoAlta).format('DD/MM/YYYY');
+                }
+                return {...paciente, previsaoAlta: previsaoAltaStr}
             });
+
+            return {...state, items: itemsComPrevisao, lastUpdated: action.receivedAt};
+            
         case SHUFFLE_PACIENTES:
 
             let itemsLength = state.items.length;
@@ -68,6 +84,8 @@ export function pacientesByUnidade(state = {}, action) {
         case RECEIVE_PACIENTES:
         case REQUEST_PACIENTES:
         case SHUFFLE_PACIENTES:
+        case RECEIVE_PREVISOES:
+        case REQUEST_PREVISOES:
             return Object.assign({}, state, {
                 [action.unidade]: pacientes(state[action.unidade], action)
             });
