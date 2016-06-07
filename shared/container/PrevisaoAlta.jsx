@@ -12,7 +12,9 @@ class PrevisaoAlta extends Component {
   }
 
   componentDidMount () {
-    this.props.fetchPrevisaoAltaIfNeeded(this.props.value);
+    if (this.props.value) {
+      this.props.fetchPrevisaoAltaIfNeeded(this.props.value);  
+    }
   }
 
   render () {
@@ -37,7 +39,6 @@ class PrevisaoAlta extends Component {
 
 PrevisaoAlta.propTypes = {
   previsoes: PropTypes.object.isRequired,
-  isFetching: PropTypes.bool.isRequired,
   lastUpdated: PropTypes.number,
   fetchPrevisaoAltaIfNeeded: PropTypes.func.isRequired
 };

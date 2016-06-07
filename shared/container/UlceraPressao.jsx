@@ -10,28 +10,31 @@ class UlceraPressao extends Component {
   }
 
   componentDidMount () {
-    this.props.fetchUlceraPressaoIfNeeded(this.props.value);
+    if (this.props.value) {
+      this.props.fetchUlceraPressaoIfNeeded(this.props.value);
+    }
+  }
+
+  renderImgBed(color) {
+    return <img src='/imgs/bed.png' width='50px' style={{backgroundColor: color, borderRadius: '5px'}} />;
   }
 
   renderPolygon (obj) {
     if (obj) {
       let ulceraPressao = obj.ulceraPressao;
-
       if (ulceraPressao >= 4 && ulceraPressao <= 12) {
-        return <img src='/imgs/bed.png' width='50px' style={{backgroundColor: '#88dc88', borderRadius: '5px'}} />;
+        return this.renderImgBed('#88dc88');
       } else if (ulceraPressao >= 13 && ulceraPressao <= 15) {
-        return <img src='/imgs/bed.png' width='50px' style={{backgroundColor: '#fd9b10', borderRadius: '5px'}} />;
+        return this.renderImgBed('#fd9b10');
       } else if (ulceraPressao >= 4 && ulceraPressao <= 12) {
-        return <img src='/imgs/bed.png' width='50px' style={{backgroundColor: '#ff5555', borderRadius: '5px'}} />;
+        return this.renderImgBed('#ff5555');
       }
     }
   }
 
   render () {
     const {valoresUlceraPressao} = this.props;
-
     let obj = valoresUlceraPressao[this.props.value];
-
     return (
     <div>
       {this.renderPolygon(obj)}
@@ -43,7 +46,6 @@ class UlceraPressao extends Component {
 
 UlceraPressao.propTypes = {
   valoresUlceraPressao: PropTypes.object.isRequired,
-  isFetching: PropTypes.bool.isRequired,
   lastUpdated: PropTypes.number,
   fetchUlceraPressaoIfNeeded: PropTypes.func.isRequired
 };

@@ -3,7 +3,6 @@ import Painel from '../components/Painel';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as PacienteActions from '../actions/PacienteActions';
-import { getFullName } from '../utils/Utils';
 
 var moment = require('moment');
 
@@ -16,7 +15,7 @@ class PainelView extends Component {
   }
 
   shufflePacientes () {
-    let unidade = getFullName(this.props.params.unidade);
+    let unidade = this.props.params.unidade;
     this.props.shufflePacientes(unidade);
   }
 
@@ -25,10 +24,10 @@ class PainelView extends Component {
   }
 
   componentDidMount () {
-    let unidade = getFullName(this.props.params.unidade);
+    let unidade = this.props.params.unidade;
     this.props.selectUnidade(unidade);
     this.props.fetchPacientesIfNeeded(unidade);
-    setInterval(this.shufflePacientes, 5000);
+    setInterval(this.shufflePacientes, 10000);
   }
 
   componentWillReceiveProps (nextProps) {

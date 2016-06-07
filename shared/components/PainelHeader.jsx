@@ -1,4 +1,5 @@
 import React from 'react';
+import { getFullName } from '../utils'
 
 export default class PainelHeader extends React.Component {
 
@@ -18,13 +19,16 @@ export default class PainelHeader extends React.Component {
         Data: {data}
       </div>
       <div className={this.renderHeaderElem('title')}>
-        {unidade}
+        {getFullName(unidade)}
       </div>
       <div className={this.renderHeaderElem('logo')}>
         <img src='/imgs/logo.png' width='180px' />
       </div>
       <div className={this.renderHeaderElem('leito')}>
         APTO
+      </div>
+      <div className={this.renderHeaderElem('status')}>
+        STATUS
       </div>
       <div className={this.renderHeaderElem('name')}>
         NOME DO PACIENTE
@@ -40,6 +44,9 @@ export default class PainelHeader extends React.Component {
       </div>
       <div className={this.renderHeaderSmallElem('previsao')}>
         PREVISÃO DE ALTA
+      </div>
+      <div className={this.renderHeaderSmallElem('precaucao')}>
+        PRECAUÇÃO
       </div>
       <div className={this.renderHeaderSmallElem('scp')}>
         SCP
@@ -61,9 +68,6 @@ export default class PainelHeader extends React.Component {
       </div>
       <div className={this.renderHeaderSmallElem('jejum')}>
         JEJUM
-      </div>
-      <div className={this.renderHeaderSmallElem('precaucao')}>
-        PRECAUÇÃO
       </div>
     </div>
     );

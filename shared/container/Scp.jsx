@@ -10,7 +10,9 @@ class Scp extends Component {
     }
 
     componentDidMount() {
-        this.props.fetchScpIfNeeded(this.props.value);
+        if (this.props.value) {
+            this.props.fetchScpIfNeeded(this.props.value);    
+        }
     }
 
     renderPolygon(obj) {
@@ -61,7 +63,6 @@ render()
 
 Scp.propTypes = {
     scps: PropTypes.object.isRequired,
-    isFetching: PropTypes.bool.isRequired,
     lastUpdated: PropTypes.number,
     fetchScpIfNeeded: PropTypes.func.isRequired
 };

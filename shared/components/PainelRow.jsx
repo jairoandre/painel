@@ -19,11 +19,13 @@ export default class PainelRow extends React.Component {
         return (
             <div title={paciente.atendimento}>
                 <div className={this.rowNormalClass('leito')}>{paciente.leito}</div>
+                <div className={this.rowNormalClass('status')}>{paciente.status}</div>
                 <div className={this.rowNormalClass('name')}>{paciente.nome}</div>
                 <div className={this.rowNormalClass('medic')}>{paciente.medico}</div>
                 <div className={this.rowNormalClass('convenio')}>{paciente.convenio}</div>
                 <div className={this.rowNormalClass('obs')}>{paciente.observacao}</div>
                 <div className={this.rowSmallClass('previsao')}>{<PrevisaoAlta value={paciente.atendimento}/>}</div>
+                <div className={this.rowSmallClass('precaucao')}>{paciente.precaucao}</div>
                 <div className={this.rowSmallClass('scp')}><Scp value={paciente.atendimento}/></div>
                 <div className={this.rowSmallClass('riscoQueda')}><RiscoQueda value={paciente.atendimento}/></div>
                 <div className={this.rowSmallClass('ulceraPressao')}><UlceraPressao value={paciente.atendimento}/></div>
@@ -31,7 +33,6 @@ export default class PainelRow extends React.Component {
                 <div className={this.rowSmallClass('exame')}>{paciente.exame}</div>
                 <div className={this.rowSmallClass('cirurgia')}>{paciente.cirurgia}</div>
                 <div className={this.rowSmallClass('jejum')}>{paciente.jejum}</div>
-                <div className={this.rowSmallClass('precaucao')}>{paciente.precaucao}</div>
             </div>
         );
     }

@@ -10,7 +10,9 @@ class RiscoQueda extends Component {
   }
 
   componentDidMount () {
-    this.props.fetchRiscoQuedaIfNeeded(this.props.value);
+    if (this.props.value) {
+      this.props.fetchRiscoQuedaIfNeeded(this.props.value);
+    }
   }
 
   renderPolygon (obj) {
@@ -41,7 +43,6 @@ class RiscoQueda extends Component {
 
 RiscoQueda.propTypes = {
   riscos: PropTypes.object.isRequired,
-  isFetching: PropTypes.bool.isRequired,
   lastUpdated: PropTypes.number,
   fetchRiscoQuedaIfNeeded: PropTypes.func.isRequired
 };

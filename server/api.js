@@ -1,5 +1,6 @@
 import express from 'express';
 const database = require('./oracle/database.js');
+import {getId} from '../shared/utils';
 
 function getRouter () {
   var router = express.Router();
@@ -29,31 +30,43 @@ module.exports.getRouter = getRouter;
 
 var mock = require('./mock.js');
 
-const pacienteLeitoColunas = [
-  'TB_ATENDIME.CD_ATENDIMENTO',
-  'LEITO.DS_LEITO',
-  'PACIENTE.NM_PACIENTE',
-  'PRESTADOR.NM_MNEMONICO',
-  'CONVENIO.NM_CONVENIO'
-];
-
 const pacienteLeitoSQL = `
-  SELECT ${pacienteLeitoColunas.join()} FROM DBAMV.TB_ATENDIME
-  JOIN DBAMV.PACIENTE
-    ON TB_ATENDIME.CD_PACIENTE = PACIENTE.CD_PACIENTE
-  JOIN DBAMV.LEITO
-    ON TB_ATENDIME.CD_LEITO = LEITO.CD_LEITO
-  JOIN DBAMV.UNID_INT
-    ON UNID_INT.CD_UNID_INT = LEITO.CD_UNID_INT
-  JOIN DBAMV.PRESTADOR
-    ON TB_ATENDIME.CD_PRESTADOR = PRESTADOR.CD_PRESTADOR
-  JOIN DBAMV.CONVENIO
-    ON TB_ATENDIME.CD_CONVENIO = CONVENIO.CD_CONVENIO
-    WHERE TB_ATENDIME.TP_ATENDIMENTO = 'I'
-      AND UNID_INT.DS_UNID_INT = :DS_UNID_INT
-      AND TB_ATENDIME.DT_ALTA IS NULL
-      AND TB_ATENDIME.CD_MULTI_EMPRESA = 1
-      ORDER BY LEITO.DS_LEITO
+SELECT
+P.CD_ATENDIMENTO, L.DS_LEITO, P.NM_PACIENTE, P.NM_MNEMONICO, P.NM_CONVENIO, L.TP_OCUPACAO
+FROM
+(
+   SELECT
+   A.CD_ATENDIMENTO,
+   L.CD_LEITO,
+   P.NM_PACIENTE,
+   PR.NM_MNEMONICO,
+   C.NM_CONVENIO,
+   U.DS_UNID_INT
+   FROM DBAMV.TB_ATENDIME A
+   JOIN DBAMV.PACIENTE P ON A.CD_PACIENTE = P.CD_PACIENTE
+   JOIN DBAMV.PRESTADOR PR ON A.CD_PRESTADOR = PR.CD_PRESTADOR
+   JOIN DBAMV.CONVENIO C ON A.CD_CONVENIO = C.CD_CONVENIO
+   JOIN DBAMV.LEITO L ON A.CD_LEITO = L.CD_LEITO
+   JOIN DBAMV.UNID_INT U ON U.CD_UNID_INT = L.CD_UNID_INT
+   WHERE A.TP_ATENDIMENTO = 'I'
+   AND U.CD_UNID_INT IN (:CD_UNID_INT)
+   AND A.DT_ALTA IS NULL
+   AND A.CD_MULTI_EMPRESA = 1
+   ORDER BY L.DS_LEITO
+)
+P
+RIGHT JOIN
+(
+   SELECT
+   L.CD_LEITO, L.DS_LEITO, L.TP_OCUPACAO
+   FROM DBAMV.LEITO L
+   JOIN DBAMV.UNID_INT U ON L.CD_UNID_INT = U.CD_UNID_INT
+   WHERE U.CD_UNID_INT IN (:CD_UNIT_INT)
+   AND L.TP_SITUACAO = 'A'
+   ORDER BY L.DS_LEITO
+)
+L ON P.CD_LEITO = L.CD_LEITO
+ORDER BY L.DS_LEITO
 `;
 
 const previsaoAltaSQL = `
@@ -83,7 +96,7 @@ SELECT TB_ATENDIME.CD_ATENDIMENTO, MAX(ITPRE_MED.DH_INICIAL)
         ON TB_ATENDIME.CD_LEITO = LEITO.CD_LEITO
     JOIN DBAMV.UNID_INT
         ON UNID_INT.CD_UNID_INT = LEITO.CD_UNID_INT  
-    WHERE UNID_INT.DS_UNID_INT = :DS_UNID_INT    
+    WHERE UNID_INT.CD_UNID_INT IN (:CD_UNID_INT)
         AND ITPRE_MED.CD_TIP_PRESC = 26057
         AND ITPRE_MED.TP_SITUACAO = 'N'
         AND TB_ATENDIME.DT_ALTA IS NULL
@@ -116,12 +129,29 @@ SELECT VL_RESULTADO
     ORDER BY DH_AVALIACAO DESC
 `;
 
+// ALERGIA
+const alergiaSQL = `
+SELECT RR.CD_PERGUNTA_DOC, RR.DS_RESPOSTA FROM DBAMV.REGISTRO_DOCUMENTO RD
+  JOIN DBAMV.REGISTRO_RESPOSTA RR ON
+  RD.CD_REGISTRO_DOCUMENTO = RR.CD_REGISTRO_DOCUMENTO 
+  WHERE RD.CD_ATENDIMENTO = :CD_ATENDIMENTO
+  AND RR.DS_RESPOSTA IS NOT NULL
+    AND RR.CD_PERGUNTA_DOC IN (16361,16362,16381,16382,16383,16384,16385,16386,16387,16388,16389)
+    AND RD.DT_REGISTRO = (
+    SELECT MAX(RD.DT_REGISTRO) FROM DBAMV.REGISTRO_DOCUMENTO RD
+      JOIN DBAMV.REGISTRO_RESPOSTA RR ON RD.CD_REGISTRO_DOCUMENTO = RR.CD_REGISTRO_DOCUMENTO 
+      WHERE RD.CD_ATENDIMENTO = :CD_ATENDIMENTO
+      AND RR.DS_RESPOSTA IS NOT NULL
+      AND RR.CD_PERGUNTA_DOC IN (16361,16362,16381,16382,16383,16384,16385,16386,16387,16388,16389))
+`;
+
 function getPacientes (req, res, next) {
   if (process.env.MOCK) {
     res.send(mock);
   } else {
+    let id = getId(req.params.unidade);
     database.simpleExecute(pacienteLeitoSQL,
-      {DS_UNID_INT: req.params.unidade},
+      [id, id],
       {outFormat: database.ARRAY})
       .then(function (results) {
         res.send(results.rows.map((item, i) => {
@@ -131,7 +161,8 @@ function getPacientes (req, res, next) {
             leito: item[1],
             nome: item[2],
             medico: item[3],
-            convenio: item[4]
+            convenio: item[4],
+            status: item[5]
           };
         }));
       })
@@ -146,7 +177,7 @@ function getPrevisoesAlta (req, res, next) {
     res.send(mock.map((item) => {return {[item.atendimento]: new Date()};}));
   } else {
     database.simpleExecute(previsoesAltaSQL,
-      {DS_UNID_INT: req.params.unidade},
+      {CD_UNID_INT: getId(req.params.unidade)},
       {outFormat: database.ARRAY})
         .then(function (results) {
           let result = {};

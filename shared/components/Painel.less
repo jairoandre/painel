@@ -5,7 +5,8 @@
 @headerElemHeight: 40px;
 @smallWidth: @width * 0.04;
 @leitoWidth: @width * 0.05;
-@nameWidth: @width * 0.24;
+@statusWidth: @width * 0.04;
+@nameWidth: @width * 0.20;
 @medicWidth: @width * 0.15;
 @convenioWidth: @width * 0.08;
 @obsWidth: @width * 0.12;
@@ -27,19 +28,20 @@
 
 // LEFT OFFSETS
 
-@nameOffset: @leitoWidth;
+@statusOffset: @leitoWidth;
+@nameOffset: @statusOffset + @statusWidth;
 @medicOffset: @nameOffset + @nameWidth;
 @convenioOffset: @medicOffset + @medicWidth;
 @obsOffset: @convenioOffset + @convenioWidth;
 @previsaoOffset: @obsOffset + @obsWidth;
-@scpOffset: @previsaoOffset + @smallWidth;
+@precaucaoOffset: @previsaoOffset + @smallWidth;
+@scpOffset: @precaucaoOffset + @smallWidth;
 @riscoQuedaOffset: @scpOffset + @smallWidth;
 @ulceraPressaoOffset: @riscoQuedaOffset + @smallWidth;
 @alergiaOffset: @ulceraPressaoOffset + @smallWidth;
 @exameOffset: @alergiaOffset + @smallWidth;
 @cirurgiaOffset: @exameOffset + @smallWidth;
 @jejumOffset: @cirurgiaOffset + @smallWidth;
-@precaucaoOffset: @jejumOffset + @smallWidth;
 
 
 .panel {
@@ -59,8 +61,9 @@
   background-color: #fff;
   color: #fff;
   line-height: @headerElemHeight;
-  padding-left: @width * 0.004;
+  padding-left: @width * 0.003;
   border: 1px solid #fff;
+  font-size: 15px;
 }
 
 .header__elem--small {
@@ -99,6 +102,13 @@
   width: @leitoWidth;
   top: @headerElemHeight;
   left: 0;
+  background-color: @thinBlue;
+}
+
+.header__elem--status {
+  width: @statusWidth;
+  top: @headerElemHeight;
+  left: @statusOffset;
   background-color: @thinBlue;
 }
 
@@ -231,6 +241,13 @@
   font-size: 18px;
   font-weight: bold;
   font-style: oblique
+}
+
+.panel__body__row__elem--status {
+  width: @statusWidth;
+  left: @statusOffset;
+  font-size: 13px;
+  text-align: center;
 }
 
 .panel__body__row__elem--small {
