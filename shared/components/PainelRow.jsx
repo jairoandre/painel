@@ -3,6 +3,7 @@ import Scp from '../container/Scp';
 import RiscoQueda from '../container/RiscoQueda';
 import PrevisaoAlta from '../container/PrevisaoAlta';
 import UlceraPressao from '../container/UlceraPressao';
+import Status from './Status';
 
 export default class PainelRow extends React.Component {
 
@@ -19,7 +20,7 @@ export default class PainelRow extends React.Component {
         return (
             <div title={paciente.atendimento}>
                 <div className={this.rowNormalClass('leito')}>{paciente.leito}</div>
-                <div className={this.rowNormalClass('status')}>{paciente.status}</div>
+                <div className={this.rowNormalClass('status')}><Status value={paciente.status}/></div>
                 <div className={this.rowNormalClass('name')}>{paciente.nome}</div>
                 <div className={this.rowNormalClass('medic')}>{paciente.medico}</div>
                 <div className={this.rowNormalClass('convenio')}>{paciente.convenio}</div>

@@ -60,8 +60,8 @@ function pacientes(state = {
 
             if (delta <= 0) {
                 return state;
-            } else if (delta > 20) {
-                delta = 20;
+            } else if (delta > 5) {
+                delta = 5;
             }
 
             let cycledItems = state.items.map((item) => {

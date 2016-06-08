@@ -27,7 +27,7 @@ class PainelView extends Component {
     let unidade = this.props.params.unidade;
     this.props.selectUnidade(unidade);
     this.props.fetchPacientesIfNeeded(unidade);
-    setInterval(this.shufflePacientes, 10000);
+    setInterval(this.shufflePacientes, 5000);
   }
 
   componentWillReceiveProps (nextProps) {

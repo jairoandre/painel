@@ -110,6 +110,8 @@
   top: @headerElemHeight;
   left: @statusOffset;
   background-color: @thinBlue;
+  padding: 0;
+  text-align: center;
 }
 
 .header__elem--name {
@@ -248,6 +250,8 @@
   left: @statusOffset;
   font-size: 13px;
   text-align: center;
+  padding: 0;  
+  transform: scale(0.8);
 }
 
 .panel__body__row__elem--small {
@@ -256,7 +260,7 @@
 }
 
 .panel__body__row__elem--name {
-  width: @nameWidth;
+  width: @nameWidth - 15px;
   left: @nameOffset
 }
 
