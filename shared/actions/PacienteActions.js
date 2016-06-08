@@ -71,10 +71,7 @@ function fetchPacientes(unidade) {
     dispatch(requestPacientes(unidade))
     return fetch(`/api/pacientes/${unidade}`)
       .then(response => response.json())
-      .then(pacientes => {
-        dispatch(receivePacientes(unidade, pacientes))
-        // dispatch(fetchPrevisoes(unidade))
-      });
+      .then(pacientes => dispatch(receivePacientes(unidade, pacientes)));
   }
 }
 

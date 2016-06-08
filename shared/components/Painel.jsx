@@ -2,6 +2,7 @@ import React from 'react';
 import PainelHeader from './PainelHeader';
 import PainelRow from './PainelRow';
 import { Motion, spring } from 'react-motion';
+import Loader from 'react-loader';
 
 if (process.env.BROWSER) {
   require('./Painel.less');
@@ -24,26 +25,30 @@ export default class Painel extends React.Component {
       return (
       <Motion defaultStyle={{y: 0, o: 1}} style={motionStyle} key={key}>
         {(style) =>
-                           <div className={(paciente.i % 2 === 0) ? 'panel__body__row' : 'panel__body__row panel__body__row--zebra'}
-                                style={{
-                                 position: 'absolute',
-                                 transform: `translate3d(0, ${style.y}px, ${style.y}px)`,
-                                 opacity: style.o
-                               }}>
-                             <PainelRow paciente={paciente} key={key} index={key}/>
-                           </div>}
+                            <div className={(paciente.i % 2 === 0) ? 'panel__body__row' : 'panel__body__row panel__body__row--zebra'}
+                                 style={{
+                          position: 'absolute',
+                          transform: `translate3d(0, ${style.y}px, ${style.y}px)`,
+                          opacity: style.o
+                        }}>
+                              <PainelRow paciente={paciente} key={key} index={key}/>
+                            </div>}
       </Motion>
       );
     });
   }
 
   render () {
-    const { unidade, data} = this.props;
+    const { unidade, data, loading} = this.props;
+    let o = loading ? 0.7 : 1;
     return (
-    <div className="panel">
-      <PainelHeader unidade={unidade} data={data} />
-      <div className="panel__body">
-        {this.renderPacientes()}
+    <div>
+      <Loader loaded={!this.props.loading} />
+      <div className="panel">
+        <PainelHeader unidade={unidade} data={data} />
+        <div className="panel__body" style={{opacity: o}}>
+          {this.renderPacientes()}
+        </div>
       </div>
     </div>
     );

@@ -12,11 +12,20 @@ class PainelView extends Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.shufflePacientes = this.shufflePacientes.bind(this);
+    this.refreshPacientes = this.refreshPacientes.bind(this);
+  }
+
+  refreshPacientes() {
+    let unidade = this.props.params.unidade;
+    this.props.selectUnidade(unidade);
+    this.props.invalidateUnidade(unidade);
+    this.props.fetchPacientesIfNeeded(unidade);
   }
 
   shufflePacientes () {
-    let unidade = this.props.params.unidade;
-    this.props.shufflePacientes(unidade);
+    if (!this.props.isFetching) {
+      this.props.shufflePacientes(this.props.params.unidade);
+    }
   }
 
   handleChange (nextUnidade) {
@@ -24,10 +33,9 @@ class PainelView extends Component {
   }
 
   componentDidMount () {
-    let unidade = this.props.params.unidade;
-    this.props.selectUnidade(unidade);
-    this.props.fetchPacientesIfNeeded(unidade);
-    setInterval(this.shufflePacientes, 5000);
+    this.refreshPacientes();
+    setInterval(this.shufflePacientes, 10000);
+    setInterval(this.refreshPacientes, 60000);
   }
 
   componentWillReceiveProps (nextProps) {
@@ -38,13 +46,13 @@ class PainelView extends Component {
   }
 
   render () {
-    const {pacientes, selectedUnidade} = this.props;
+    const {pacientes, selectedUnidade, isFetching} = this.props;
 
     const date = new Date();
     const dateStr = moment(date).format('DD/MM/YYYY');
 
     return (
-    <Painel pacientes={pacientes} unidade={selectedUnidade} data={dateStr} />
+      <Painel pacientes={pacientes} unidade={selectedUnidade} data={dateStr} loading={isFetching} />
     );
   }
 }
@@ -56,7 +64,8 @@ PainelView.propTypes = {
   lastUpdated: PropTypes.number,
   selectUnidade: PropTypes.func.isRequired,
   fetchPacientesIfNeeded: PropTypes.func.isRequired,
-  shufflePacientes: PropTypes.func.isRequired
+  shufflePacientes: PropTypes.func.isRequired,
+  invalidateUnidade: PropTypes.func.isRequired
 };
 
 function mapStateToProps (state) {

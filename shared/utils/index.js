@@ -1,6 +1,21 @@
 const unidades = ['homero', 'cora', 'augusto', 'monteiro', 'rubem', 'uti1', 'uti2', 'dayclinic', 'ctq'];
 
-export function getFullName (unidade) {
+const alergias = {
+16361:  'alergia',
+16362:  'alimentar',
+16381:  'alimentarDs',
+16382:  'esparadrapo',
+16383:  'iodo',
+16384:  'latex',
+16385:  'medicamentos',
+16386:  'medicamentosDs',
+16387:  'micropore',
+16388:  'outras',
+16389:  'outrasDs'
+}
+
+
+function getFullName (unidade) {
   switch (unidade) {
     case 'homero':
       return 'HOMERO MASSENA';
@@ -37,9 +52,11 @@ const ids = {
   ctq: [10]
 }
 
-export function getId (unidade) {
+function getId (unidade) {
   var id = ids[unidade];
   if (id) {
     return id.join();
   }
 };
+
+module.exports = {getId, ids, unidades, getFullName, alergias};

@@ -4,6 +4,7 @@ import { riscoQuedaByAtendimento } from './RiscoQuedaReducer';
 import { previsaoAltaByAtendimento } from './PrevisaoAltaReducer';
 import { pacientesByUnidade, selectedUnidade } from './PacienteReducer';
 import { ulceraPressaoByAtendimento } from './UlceraPressaoReducer';
+import { alergiaByAtendimento } from './AlergiaReducer';
 
 const rootReducer = combineReducers({
   scpByAtendimento,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   previsaoAltaByAtendimento,
   pacientesByUnidade,
   ulceraPressaoByAtendimento,
+  alergiaByAtendimento,
   selectedUnidade
 });
 
