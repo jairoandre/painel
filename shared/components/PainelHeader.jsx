@@ -1,5 +1,6 @@
 import React from 'react';
 import { getFullName } from '../utils'
+import { Link } from 'react-router';
 
 export default class PainelHeader extends React.Component {
 
@@ -22,7 +23,9 @@ export default class PainelHeader extends React.Component {
         {getFullName(unidade)}
       </div>
       <div className={this.renderHeaderElem('logo')}>
-        <img src='/imgs/logo.png' width='180px' />
+        <Link to={`/painel`}>
+          <img src='/imgs/logo.png' width='180px' />
+        </Link>
       </div>
       <div className={this.renderHeaderElem('leito')}>
         APTO
@@ -55,7 +58,7 @@ export default class PainelHeader extends React.Component {
         RISCO DE QUEDA
       </div>
       <div className={this.renderHeaderSmallElem('ulceraPressao')}>
-        ÚLCERA POR PRESSÃO
+        ÚLCERA PRESSÃO
       </div>
       <div className={this.renderHeaderSmallElem('alergia')}>
         ALERGIA

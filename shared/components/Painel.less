@@ -4,10 +4,15 @@
 @titleElemWidth: @width - 2 * @headerElemWidth;
 @headerElemHeight: 40px;
 @smallWidth: @width * 0.04;
-@leitoWidth: @width * 0.05;
+@precaucaoWidth: @width * 0.03;
+@scpWidth: @width * 0.03;
+@riscoQuedaWidth: @width * 0.03;
+@ulceraPressaoWidth: @width * 0.03;
+@alergiaWidth: @width * 0.08;
+@leitoWidth: @width * 0.06;
 @statusWidth: @width * 0.04;
 @nameWidth: @width * 0.20;
-@medicWidth: @width * 0.15;
+@medicWidth: @width * 0.14;
 @convenioWidth: @width * 0.08;
 @obsWidth: @width * 0.12;
 
@@ -18,7 +23,7 @@
 @scpColor: #00afee;
 @riscoQuedaColor: #00a95a;
 @ulceraPressaoColor: #a95b41;
-@alergiaColor: #ea278f;
+@alergiaColor: #ff6fbc;
 @exameColor: #989898;
 @cirurgiaColor: #f38634;
 @jejumColor: #85706d;
@@ -35,11 +40,11 @@
 @obsOffset: @convenioOffset + @convenioWidth;
 @previsaoOffset: @obsOffset + @obsWidth;
 @precaucaoOffset: @previsaoOffset + @smallWidth;
-@scpOffset: @precaucaoOffset + @smallWidth;
-@riscoQuedaOffset: @scpOffset + @smallWidth;
-@ulceraPressaoOffset: @riscoQuedaOffset + @smallWidth;
-@alergiaOffset: @ulceraPressaoOffset + @smallWidth;
-@exameOffset: @alergiaOffset + @smallWidth;
+@scpOffset: @precaucaoOffset + @precaucaoWidth;
+@riscoQuedaOffset: @scpOffset + @scpWidth;
+@ulceraPressaoOffset: @riscoQuedaOffset + @riscoQuedaWidth;
+@alergiaOffset: @ulceraPressaoOffset + @ulceraPressaoWidth;
+@exameOffset: @alergiaOffset + @alergiaWidth;
 @cirurgiaOffset: @exameOffset + @smallWidth;
 @jejumOffset: @cirurgiaOffset + @smallWidth;
 
@@ -64,6 +69,7 @@
   padding-left: @width * 0.003;
   border: 1px solid #fff;
   font-size: 15px;
+  text-shadow: #222 2px 2px 5px;
 }
 
 .header__elem--small {
@@ -151,14 +157,14 @@
 }
 
 .header__elem--scp {
-  width: @smallWidth;
+  width: @scpWidth;
   top: @headerElemHeight;
   left: @scpOffset;
   background-color: @scpColor;
 }
 
 .header__elem--riscoQueda {
-  width: @smallWidth;
+  width: @riscoQuedaWidth;
   top: @headerElemHeight;
   left: @riscoQuedaOffset;
   background-color: @riscoQuedaColor;
@@ -166,7 +172,7 @@
 }
 
 .header__elem--ulceraPressao {
-  width: @smallWidth;
+  width: @ulceraPressaoWidth;
   top: @headerElemHeight;
   left: @ulceraPressaoOffset;
   background-color: @ulceraPressaoColor;
@@ -174,7 +180,7 @@
 }
 
 .header__elem--alergia {
-  width: @smallWidth;
+  width: @alergiaWidth;
   top: @headerElemHeight;
   left: @alergiaOffset;
   background-color: @alergiaColor;
@@ -202,10 +208,11 @@
 }
 
 .header__elem--precaucao {
-  width: @smallWidth;
+  width: @precaucaoWidth;
   top: @headerElemHeight;
   left: @precaucaoOffset;
   background-color: @precaucaoColor;
+  font-size: 8px;
 }
 
 .panel__body {
@@ -240,10 +247,9 @@
 
 .panel__body__row__elem--leito {
   width: @leitoWidth;
-  font-size: 12px;
+  font-size: 16px;
   font-weight: bold;
-  padding: 0;
-  text-align: center;
+  text-align: left;
 }
 
 .panel__body__row__elem--status {
@@ -286,7 +292,7 @@
 }
 
 .panel__body__row__elem--scp {
-  width: @smallWidth;
+  width: @scpWidth;
   left: @scpOffset;
   text-align: center;
   padding: 0;
@@ -294,7 +300,7 @@
 }
 
 .panel__body__row__elem--riscoQueda {
-  width: @smallWidth;
+  width: @riscoQuedaWidth;
   left: @riscoQuedaOffset;
   text-align: center;
   padding: 0;
@@ -302,7 +308,7 @@
 }
 
 .panel__body__row__elem--ulceraPressao {
-  width: @smallWidth;
+  width: @ulceraPressaoWidth;
   left: @ulceraPressaoOffset;
   text-align: center;
   padding: 0;
@@ -310,7 +316,7 @@
 }
 
 .panel__body__row__elem--alergia {
-  width: @smallWidth;
+  width: @alergiaWidth;
   left: @alergiaOffset;
   padding: 0;
   text-align: center;
@@ -332,6 +338,9 @@
 }
 
 .panel__body__row__elem--precaucao {
-  width: @smallWidth;
+  width: @precaucaoWidth;
   left: @precaucaoOffset;
+  text-align: center;
+  padding: 0;
+  transform: scale(0.8);
 }

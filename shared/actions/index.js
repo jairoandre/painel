@@ -4,3 +4,5 @@ export * from './RiscoQuedaActions';
 export * from './PrevisaoAltaActions';
 export * from './UlceraPressaoActions';
 export * from './AlergiaActions';
+export * from './IntervalActions';
+export * from './PrecaucaoActions';

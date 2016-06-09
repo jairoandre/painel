@@ -19,33 +19,34 @@ class Alergia extends Component {
     }
   }
 
-  renderPolygon (obj) {
+  renderAlergias (obj) {
     if (obj) {
-      return (
-      <div>
-        <div className='alergia alergia__alimentar'>
-          {obj.alimentar ? obj.alimentarDs : ''}
-        </div>
-        <div className='alergia alergia__esparadrapo'>
-          {obj.esparadrapo ? 'Esparadrapo' : ''}
-        </div>
-        <div className='alergia alergia__iodo'>
-          {obj.iodo ? 'Iodo' : ''}
-        </div>
-        <div className='alergia alergia__latex'>
-          {obj.latex ? 'Látex' : ''}
-        </div>
-        <div className='alergia alergia__medicamentos'>
-          {obj.medicamentos ? obj.medicamentosDs : ''}
-        </div>
-        <div className='alergia alergia__micropore'>
-          {obj.micropore ? 'Micropore' : ''}
-        </div>
-        <div className='alergia alergia__outros'>
-          {obj.outros ? obj.outrosDs : ''}
-        </div>
-      </div>
-      );
+        let arr = [];
+        if (obj.alimentarDs) {
+            arr.push(obj.alimentarDs);
+        }
+        if (obj.esparadrapo) {
+            arr.push('ESPARADRAPO');
+        }
+        if (obj.iodo) {
+            arr.push('IODO');
+        }
+        if (obj.medicamentosDs) {
+            arr.push(obj.medicamentosDs);
+        }
+        if (obj.micropore) {
+            arr.push('MICROPORE');
+        }
+        if (obj.outrosDs) {
+            arr.push(obj.outrosDs);
+        }
+        if (arr.length > 0) {
+            return (
+                <div className='alergia'>
+                    {arr.join(', ')}
+                </div>
+                );
+        }
     }
   }
 
@@ -60,7 +61,7 @@ class Alergia extends Component {
 
     return (
     <div>
-      {this.renderPolygon(obj)}
+      {this.renderAlergias(obj)}
     </div>
     );
   }

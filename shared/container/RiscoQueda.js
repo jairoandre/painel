@@ -22,7 +22,7 @@ class RiscoQueda extends Component {
         color = '#ff5555';
       }
       return (
-        <img src='/imgs/fall.png' width='50px' style={{backgroundColor: color, borderRadius: '5px'}} />
+        <img src='/imgs/slide.png' width='40px' style={{backgroundColor: color, borderRadius: '5px', padding: '5px'}} />
       );
     }
   }

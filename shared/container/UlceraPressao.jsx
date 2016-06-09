@@ -16,7 +16,7 @@ class UlceraPressao extends Component {
   }
 
   renderImgBed(color) {
-    return <img src='/imgs/bed.png' width='50px' style={{backgroundColor: color, borderRadius: '5px'}} />;
+    return <img src='/imgs/bed.png' width='40px' style={{backgroundColor: color, borderRadius: '5px', padding: '5px'}} />;
   }
 
   renderPolygon (obj) {

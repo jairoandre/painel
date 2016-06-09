@@ -1,4 +1,4 @@
-const unidades = ['homero', 'cora', 'augusto', 'monteiro', 'rubem', 'uti1', 'uti2', 'dayclinic', 'ctq'];
+const unidades = ['homero', 'cora', 'augusto', 'monteiro', 'rubem', 'uti1', 'uti2', 'dayclinic'];
 
 const alergias = {
 16361:  'alergia',

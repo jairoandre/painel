@@ -3,6 +3,7 @@ import Painel from '../components/Painel';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as PacienteActions from '../actions/PacienteActions';
+import { includeInterval } from '../actions/IntervalActions';
 
 var moment = require('moment');
 
@@ -34,8 +35,10 @@ class PainelView extends Component {
 
   componentDidMount () {
     this.refreshPacientes();
-    setInterval(this.shufflePacientes, 10000);
-    setInterval(this.refreshPacientes, 60000);
+    let shuffleId = setInterval(this.shufflePacientes, 10000);
+    this.props.includeInterval(shuffleId);
+    let refreshId = setInterval(this.refreshPacientes, 60500);
+    this.props.includeInterval(refreshId);
   }
 
   componentWillReceiveProps (nextProps) {
@@ -83,7 +86,7 @@ function mapStateToProps (state) {
 }
 
 function mapDispatchToProps (dispatch) {
-  return bindActionCreators(PacienteActions, dispatch);
+  return bindActionCreators({...PacienteActions, includeInterval}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PainelView);

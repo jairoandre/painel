@@ -23,16 +23,16 @@ export default class Painel extends React.Component {
         o: (paciente.i >= 20 ? spring(0) : 1)
       };
       return (
-      <Motion defaultStyle={{y: 0, o: 1}} style={motionStyle} key={key}>
+      <Motion defaultStyle={{y: 0, o: 1}} style={motionStyle} key={key} scale={1.5}>
         {(style) =>
-                            <div className={(paciente.i % 2 === 0) ? 'panel__body__row' : 'panel__body__row panel__body__row--zebra'}
-                                 style={{
-                          position: 'absolute',
-                          transform: `translate3d(0, ${style.y}px, ${style.y}px)`,
-                          opacity: style.o
-                        }}>
-                              <PainelRow paciente={paciente} key={key} index={key}/>
-                            </div>}
+          <div className={(paciente.i % 2 === 0) ? 'panel__body__row' : 'panel__body__row panel__body__row--zebra'}
+               style={{
+                      position: 'absolute',
+                      transform: `translate3d(0, ${style.y}px, ${style.y}px)`,
+                      opacity: style.o
+                      }}>
+            <PainelRow paciente={paciente} key={key} index={key}/>
+          </div>}
       </Motion>
       );
     });
