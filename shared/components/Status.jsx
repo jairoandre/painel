@@ -6,10 +6,14 @@ if (process.env.BROWSER) {
 
 export default class Status extends React.Component {
 
-  getClassName(value) {
+  getClassName(value, altaMedica) {
     switch(value) {
       case 'O':
-        return 'status status--ocupado';
+        if (altaMedica) {
+          return 'status status--alta';
+        } else {
+          return 'status status--ocupado';  
+        }        
       case 'V':
         return 'status status--vago';
       case 'A':
@@ -49,7 +53,7 @@ export default class Status extends React.Component {
 
   render () {
     return (
-      <img src={this.getImgName(this.props.value)} width='40px' className={this.getClassName(this.props.value)} />
+      <img src={this.getImgName(this.props.value)} width='40px' className={this.getClassName(this.props.value, this.props.altaMedica)} />
       );
   }
 

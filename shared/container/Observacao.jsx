@@ -11,6 +11,8 @@ import Dialog from 'material-ui/Dialog';
 import IconButton from 'material-ui/IconButton';
 import * as PacienteActions from '../actions/PacienteActions';
 import ModeEdit from 'material-ui/svg-icons/editor/mode-edit';
+import Exames from './Exames';
+import Marquee from '../components/Marquee';
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -54,7 +56,7 @@ class Observacao extends React.Component {
         <TableRowColumn style={{width: '25%'}}>{paciente.nome}</TableRowColumn>
         <TableRowColumn style={{width: '20%'}}>{paciente.medic}</TableRowColumn>
         <TableRowColumn style={{width: '10%'}}>{paciente.convenio}</TableRowColumn>
-        <TableRowColumn style={{width: '40%'}}>{paciente.observacao}<IconButton><ModeEdit/></IconButton></TableRowColumn>
+        <TableRowColumn style={{width: '40%'}}><Marquee data={['Teste 1', 'Teste 2']}/><IconButton><ModeEdit/></IconButton>{paciente.observacao}</TableRowColumn>
       </TableRow>
       );
   }

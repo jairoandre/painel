@@ -23,7 +23,7 @@ export default class Painel extends React.Component {
         o: (paciente.i >= 20 ? spring(0) : 1)
       };
       return (
-      <Motion defaultStyle={{y: 0, o: 1}} style={motionStyle} key={key} scale={1.5}>
+      <Motion defaultStyle={{y: 0, o: 1}} style={motionStyle} key={key}>
         {(style) =>
           <div className={(paciente.i % 2 === 0) ? 'panel__body__row' : 'panel__body__row panel__body__row--zebra'}
                style={{
@@ -43,7 +43,7 @@ export default class Painel extends React.Component {
     let o = loading ? 0.7 : 1;
     return (
     <div>
-      <Loader loaded={!this.props.loading} />
+      <Loader loaded={!this.props.loading} scale={1.5}/>
       <div className="panel">
         <PainelHeader unidade={unidade} data={data} />
         <div className="panel__body" style={{opacity: o}}>

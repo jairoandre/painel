@@ -6,6 +6,7 @@ import { pacientesByUnidade, selectedUnidade } from './PacienteReducer';
 import { ulceraPressaoByAtendimento } from './UlceraPressaoReducer';
 import { precaucaoByAtendimento } from './PrecaucaoReducer';
 import { alergiaByAtendimento } from './AlergiaReducer';
+import { examesByAtendimento } from './ExamesReducer';
 import { intervals } from './IntervalReducer';
 
 const rootReducer = combineReducers({
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   ulceraPressaoByAtendimento,
   precaucaoByAtendimento,
   alergiaByAtendimento,
+  examesByAtendimento,
   intervals,
   selectedUnidade
 });

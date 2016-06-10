@@ -24,7 +24,10 @@ function getRouter () {
     .get(getAlergia);
 
   router.route('/precaucao/:atendimento')
-    .get(getPrecaucao)
+    .get(getPrecaucao);
+
+  router.route('/exames/:atendimento')
+    .get(getExames);
 
   return router;
 }
@@ -36,7 +39,7 @@ var mock = require('./mock.js');
 function setParamsPacientesSql(ids) {
   const pacienteLeitoSQL = `
     SELECT
-    P.CD_ATENDIMENTO, L.DS_LEITO, P.NM_PACIENTE, P.NM_MNEMONICO, P.NM_CONVENIO, L.TP_OCUPACAO
+    P.CD_ATENDIMENTO, L.DS_LEITO, P.NM_PACIENTE, P.NM_MNEMONICO, P.NM_CONVENIO, L.TP_OCUPACAO, P.DT_ALTA_MEDICA
     FROM
     (
        SELECT
@@ -45,7 +48,8 @@ function setParamsPacientesSql(ids) {
        P.NM_PACIENTE,
        PR.NM_MNEMONICO,
        C.NM_CONVENIO,
-       U.DS_UNID_INT
+       U.DS_UNID_INT,
+       A.DT_ALTA_MEDICA
        FROM DBAMV.TB_ATENDIME A
        JOIN DBAMV.PACIENTE P ON A.CD_PACIENTE = P.CD_PACIENTE
        JOIN DBAMV.PRESTADOR PR ON A.CD_PRESTADOR = PR.CD_PRESTADOR
@@ -162,22 +166,17 @@ const avisoSql = `
      ON CIRURGIA_AVISO.CD_CIRURGIA = CIRURGIA.CD_CIRURGIA
   WHERE AVISO_CIRURGIA.CD_ATENDIMENTO = :CD_ATENDIMENTO`;
 
-const exameSql = `
-SELECT TB_ATENDIME.CD_ATENDIMENTO,
-    PRE_MED.CD_PRE_MED,
-    PRE_MED.DT_PRE_MED,
-    ITPRE_MED.CD_TIP_PRESC,
-    TIP_PRESC.DS_TIP_PRESC
-  FROM DBAMV.TB_ATENDIME
-  LEFT JOIN DBAMV.PRE_MED
-    ON PRE_MED.CD_ATENDIMENTO = TB_ATENDIME.CD_ATENDIMENTO
-  LEFT JOIN DBAMV.ITPRE_MED
-    ON PRE_MED.CD_PRE_MED = ITPRE_MED.CD_PRE_MED
-  LEFT JOIN DBAMV.TIP_PRESC
-    ON ITPRE_MED.CD_TIP_PRESC = TIP_PRESC.CD_TIP_PRESC
-     WHERE TB_ATENDIME.CD_ATENDIMENTO = :CD_ATENDIMENTO
-      AND TIP_PRESC.CD_TIP_ESQ IN ('ECA','EXA','ERX','ETR','EUS','LAB', 'LAS')
-      AND TB_ATENDIME.CD_MULTI_EMPRESA = '1'`;
+const examesSql = `
+SELECT
+  T.DS_TIP_PRESC
+  FROM DBAMV.TB_ATENDIME A
+    LEFT JOIN DBAMV.PRE_MED P ON P.CD_ATENDIMENTO = A.CD_ATENDIMENTO
+    LEFT JOIN DBAMV.ITPRE_MED I ON P.CD_PRE_MED = I.CD_PRE_MED
+    LEFT JOIN DBAMV.TIP_PRESC T ON I.CD_TIP_PRESC = T.CD_TIP_PRESC
+  WHERE A.CD_ATENDIMENTO = :CD_ATENDIMENTO
+    AND T.CD_TIP_ESQ IN ('ECA','EXA','ERX','ETR','EUS','LAB', 'LAS')
+    AND A.CD_MULTI_EMPRESA = '1'
+    AND P.DT_VALIDADE > SYSDATE`;
 
 const precaucaoSql = `
 SELECT RR.DS_RESPOSTA
@@ -207,7 +206,8 @@ function getPacientes (req, res, next) {
             nome: item[2],
             medico: item[3],
             convenio: item[4],
-            status: item[5]
+            status: item[5],
+            altaMedica: item[6]
           };
         }));
       })
@@ -364,6 +364,23 @@ function getAlergia (req, res, next) {
       .catch((err) => {
         console.log(err);
         res.send({});
+      });
+  }
+}
+
+function getExames (req, res, next) {
+  if (process.env.MOCK) {
+    res.send({exames: ['HEMOGRAMA COMPLETO', 'POTASSIO - BIOQUIMICA']});
+  } else {
+    database.simpleExecute(examesSql, {CD_ATENDIMENTO: req.params.atendimento}, {})
+      .then(function (results) {
+        if (results.rows && results.rows.length > 0)
+          res.send({exames: results.rows.reduce((a,b) => a.concat(b))});
+        else
+          res.send({exames: []});
+      })
+      .catch(function (err) {
+        next(err);
       });
   }
 }

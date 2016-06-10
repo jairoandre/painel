@@ -9,11 +9,12 @@
 @riscoQuedaWidth: @width * 0.03;
 @ulceraPressaoWidth: @width * 0.03;
 @alergiaWidth: @width * 0.08;
+@exameWidth: @width * 0.08;
 @leitoWidth: @width * 0.06;
 @statusWidth: @width * 0.04;
 @nameWidth: @width * 0.20;
-@medicWidth: @width * 0.14;
-@convenioWidth: @width * 0.08;
+@medicWidth: @width * 0.12;
+@convenioWidth: @width * 0.05;
 @obsWidth: @width * 0.12;
 
 @darkerBlue: #233269;
@@ -45,7 +46,7 @@
 @ulceraPressaoOffset: @riscoQuedaOffset + @riscoQuedaWidth;
 @alergiaOffset: @ulceraPressaoOffset + @ulceraPressaoWidth;
 @exameOffset: @alergiaOffset + @alergiaWidth;
-@cirurgiaOffset: @exameOffset + @smallWidth;
+@cirurgiaOffset: @exameOffset + @exameWidth;
 @jejumOffset: @cirurgiaOffset + @smallWidth;
 
 
@@ -85,6 +86,7 @@
   font-size: 30px;
   color: @gray;
   text-align: left;
+  text-shadow: none;
 }
 
 .header__elem--title {
@@ -187,7 +189,7 @@
 }
 
 .header__elem--exame {
-  width: @smallWidth;
+  width: @exameWidth;
   top: @headerElemHeight;
   left: @exameOffset;
   background-color: @exameColor;
@@ -323,8 +325,10 @@
 }
 
 .panel__body__row__elem--exame {
-  width: @smallWidth;
-  left: @exameOffset;
+  width: @exameWidth;
+  left: @exameOffset;  
+  padding: 0;
+  text-align: center;
 }
 
 .panel__body__row__elem--cirurgia {
