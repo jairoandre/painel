@@ -105,6 +105,7 @@ function initApp () {
           <meta charset="utf-8">
           <title>Painel - ${app.get('env')}</title>
           ${app.get('cssInclude')}
+          <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500' rel='stylesheet' type='text/css'>
         </head>
         <body>
           <div id="react-view">${componentHTML}</div>
