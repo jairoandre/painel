@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as ExamesActions from '../actions/ExamesActions';
+import Marquee from '../components/Marquee';
 
 if (process.env.BROWSER) {
   require('./Exames.less');
@@ -23,9 +24,7 @@ class Exames extends Component {
     if (obj && obj.exames && obj.exames.length > 0) {
       return (
         <div className='exames'>
-            <marquee scrollamount='2' direction="up" height='50px'>
-              {obj.exames.map((exame) => <p>{exame}</p>)}
-            </marquee>
+            <Marquee data={obj.exames} height='10'/>
         </div>
       );
     }

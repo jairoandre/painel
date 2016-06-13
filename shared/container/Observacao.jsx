@@ -49,14 +49,15 @@ class Observacao extends React.Component {
     this.setState({open: false});
   }
 
-  renderRow (paciente) {
+  renderRow (paciente, idx) {
     return(
-      <TableRow>
+      <TableRow key={idx}>
         <TableRowColumn style={{width: '5%'}}>{paciente.leito}</TableRowColumn>
         <TableRowColumn style={{width: '25%'}}>{paciente.nome}</TableRowColumn>
         <TableRowColumn style={{width: '20%'}}>{paciente.medic}</TableRowColumn>
         <TableRowColumn style={{width: '10%'}}>{paciente.convenio}</TableRowColumn>
-        <TableRowColumn style={{width: '40%'}}><Marquee data={['Teste 1', 'Teste 2']}/><IconButton><ModeEdit/></IconButton>{paciente.observacao}</TableRowColumn>
+        <TableRowColumn style={{width: '10%'}}><Marquee height='30' data={['Teste 1', 'Teste 2', 'Teste 3']}/></TableRowColumn>
+        <TableRowColumn style={{width: '30%'}}><IconButton><ModeEdit/></IconButton>{paciente.observacao}</TableRowColumn>
       </TableRow>
       );
   }
@@ -101,11 +102,12 @@ class Observacao extends React.Component {
               <TableHeaderColumn style={{width: '25%'}}>Paciente</TableHeaderColumn>
               <TableHeaderColumn style={{width: '20%'}}>Médico</TableHeaderColumn>
               <TableHeaderColumn style={{width: '10%'}}>Convênio</TableHeaderColumn>
-              <TableHeaderColumn style={{width: '40%'}}>Observação</TableHeaderColumn>
+              <TableHeaderColumn style={{width: '10%'}}>Items</TableHeaderColumn>
+              <TableHeaderColumn style={{width: '30%'}}>Observação</TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {pacientes.map((paciente) => this.renderRow(paciente))}
+            {pacientes.map((paciente, idx) => this.renderRow(paciente, idx))}
           </TableBody>
         </Table>
       </div>
