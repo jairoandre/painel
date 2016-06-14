@@ -6,12 +6,11 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { green100, green500, green700 } from 'material-ui/styles/colors';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
-import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
+import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
 import Dialog from 'material-ui/Dialog';
 import IconButton from 'material-ui/IconButton';
 import * as PacienteActions from '../actions/PacienteActions';
 import ModeEdit from 'material-ui/svg-icons/editor/mode-edit';
-import Exames from './Exames';
 import Marquee from '../components/Marquee';
 
 const muiTheme = getMuiTheme({
@@ -29,12 +28,12 @@ const muiTheme = getMuiTheme({
 
 class Observacao extends React.Component {
 
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.state = {open: false};
   }
 
-  refreshPacientes() {
+  refreshPacientes () {
     let unidade = this.props.params.unidade;
     this.props.selectUnidade(unidade);
     this.props.invalidateUnidade(unidade);
@@ -50,19 +49,34 @@ class Observacao extends React.Component {
   }
 
   renderRow (paciente, idx) {
-    return(
-      <TableRow key={idx}>
-        <TableRowColumn style={{width: '5%'}}>{paciente.leito}</TableRowColumn>
-        <TableRowColumn style={{width: '25%'}}>{paciente.nome}</TableRowColumn>
-        <TableRowColumn style={{width: '20%'}}>{paciente.medic}</TableRowColumn>
-        <TableRowColumn style={{width: '10%'}}>{paciente.convenio}</TableRowColumn>
-        <TableRowColumn style={{width: '10%'}}><Marquee height='30' data={['Teste 1', 'Teste 2', 'Teste 3']}/></TableRowColumn>
-        <TableRowColumn style={{width: '30%'}}><IconButton><ModeEdit/></IconButton>{paciente.observacao}</TableRowColumn>
-      </TableRow>
-      );
+    return (
+    <TableRow key={idx}>
+      <TableRowColumn style={{width: '5%'}}>
+        {paciente.leito}
+      </TableRowColumn>
+      <TableRowColumn style={{width: '25%'}}>
+        {paciente.nome}
+      </TableRowColumn>
+      <TableRowColumn style={{width: '20%'}}>
+        {paciente.medic}
+      </TableRowColumn>
+      <TableRowColumn style={{width: '10%'}}>
+        {paciente.convenio}
+      </TableRowColumn>
+      <TableRowColumn style={{width: '10%'}}>
+        <Marquee height='30' data={['Teste 1', 'Teste 2', 'Teste 3']} />
+      </TableRowColumn>
+      <TableRowColumn style={{width: '30%'}}>
+        <IconButton>
+          <ModeEdit/>
+        </IconButton>
+        {paciente.observacao}
+      </TableRowColumn>
+    </TableRow>
+    );
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.refreshPacientes();
   }
 
@@ -70,17 +84,12 @@ class Observacao extends React.Component {
     const {pacientes} = this.props;
 
     const actions = [
-      <FlatButton
-        label="Cancel"
-        primary={true}
-        onTouchTap={this.handleClose}
-      />,
+      <FlatButton label="Cancel" primary={true} onTouchTap={this.handleClose} />,
       <FlatButton
         label="Submit"
         primary={true}
         keyboardFocused={true}
-        onTouchTap={this.handleClose}
-      />,
+        onTouchTap={this.handleClose} />
     ];
 
     return (
@@ -91,19 +100,30 @@ class Observacao extends React.Component {
           actions={actions}
           modal={false}
           open={this.state.open}
-          onRequestClose={this.handleClose}>        
-            <TextField floatingLabelText='Observação'
-              hintText='Digite a observação' fullWidth={true}/>
+          onRequestClose={this.handleClose}>
+          <TextField floatingLabelText='Observação' hintText='Digite a observação' fullWidth={true} />
         </Dialog>
         <Table selectable={false}>
           <TableHeader>
             <TableRow>
-              <TableHeaderColumn style={{width: '5%'}}>APTO</TableHeaderColumn>
-              <TableHeaderColumn style={{width: '25%'}}>Paciente</TableHeaderColumn>
-              <TableHeaderColumn style={{width: '20%'}}>Médico</TableHeaderColumn>
-              <TableHeaderColumn style={{width: '10%'}}>Convênio</TableHeaderColumn>
-              <TableHeaderColumn style={{width: '10%'}}>Items</TableHeaderColumn>
-              <TableHeaderColumn style={{width: '30%'}}>Observação</TableHeaderColumn>
+              <TableHeaderColumn style={{width: '5%'}}>
+                APTO
+              </TableHeaderColumn>
+              <TableHeaderColumn style={{width: '25%'}}>
+                Paciente
+              </TableHeaderColumn>
+              <TableHeaderColumn style={{width: '20%'}}>
+                Médico
+              </TableHeaderColumn>
+              <TableHeaderColumn style={{width: '10%'}}>
+                Convênio
+              </TableHeaderColumn>
+              <TableHeaderColumn style={{width: '10%'}}>
+                Items
+              </TableHeaderColumn>
+              <TableHeaderColumn style={{width: '30%'}}>
+                Observação
+              </TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -127,7 +147,7 @@ function mapStateToProps (state) {
     selectedUnidade,
     pacientes,
     isFetching,
-    lastUpdated};
+  lastUpdated};
 }
 
 function mapDispatchToProps (dispatch) {
@@ -135,4 +155,3 @@ function mapDispatchToProps (dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Observacao);
-

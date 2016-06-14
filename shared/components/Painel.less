@@ -67,6 +67,7 @@
   background-color: #fff;
   color: #fff;
   line-height: @headerElemHeight;
+  box-sizing: border-box;
   padding-left: @width * 0.003;
   border: 1px solid #fff;
   font-size: 15px;
@@ -236,7 +237,8 @@
 }
 
 .panel__body__row__elem {
-  padding-left: @width * 0.004;
+  box-sizing: border-box;
+  padding-left: @width * 0.003;
   font-size: 18px;
   height: @rowElemHeight;
   line-height: @rowElemHeight;
@@ -269,7 +271,7 @@
 }
 
 .panel__body__row__elem--name {
-  width: @nameWidth - 15px;
+  width: @nameWidth;
   left: @nameOffset
 }
 
