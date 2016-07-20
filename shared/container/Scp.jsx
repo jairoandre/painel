@@ -7,12 +7,24 @@ class Scp extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {intervalId: null};
+        this.fetchData = this.fetchData.bind(this);
     }
 
-    componentDidMount() {
+    fetchData () {
+        this.props.fetchScpIfNeeded(this.props.value);
+    }
+
+    componentDidMount () {
         if (this.props.value) {
-            this.props.fetchScpIfNeeded(this.props.value);    
-        }
+            this.props.fetchScpIfNeeded(this.props.value);
+            let intervalId = setInterval(this.fetchData, 120000);
+            this.setState({...this.state, intervalId});
+        }        
+    }
+
+    componentWillUnmount () {
+        clearInterval(this.state.intervalId);
     }
 
     renderPolygon(obj) {
