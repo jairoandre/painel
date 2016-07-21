@@ -151,7 +151,7 @@ function initApp () {
       .then(function () {
         const PORT = process.env.PORT || 3000;
         httpServer.listen(PORT, function () {
-          console.log(`==> 🌎  Listening on port ${PORT}. Open up http://localhost:${PORT}/ in your browser.`);
+          console.log(`==> 🌎  Listening on port ${PORT}.`);
         });
       })
       .catch(function (err) {
@@ -182,9 +182,12 @@ function shutdown () {
       });
   });
 
-  for (key in openHttpConnections) {
+  Object
+  .keys(openHttpConnections)
+  .forEach(key => {
     openHttpConnections[key].destroy();
-  }
+  });
+  
 }
 
 function handleError (err, req, res, next) {

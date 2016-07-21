@@ -17,12 +17,14 @@ class Exames extends Component {
   }
 
   fetchData () {
-    this.props.fetchExamesIfNeeded(this.props.value);
+    if (this.props.value) {
+      this.props.fetchExamesIfNeeded(this.props.value);
+    }
   }
 
   componentDidMount () {
     if (this.props.value) {
-      this.props.fetchExamesIfNeeded(this.props.value);    
+      this.props.fetchExamesIfNeeded(this.props.value);
       let intervalId = setInterval(this.fetchData, 120000);
       this.setState({...this.state, intervalId});
     }
