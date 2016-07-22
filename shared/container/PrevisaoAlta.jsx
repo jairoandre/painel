@@ -14,7 +14,9 @@ class PrevisaoAlta extends Component {
   }
 
   fetchData () {
-    this.props.fetchPrevisaoAltaIfNeeded(this.props.value);
+    if (this.props.value) {
+      this.props.fetchPrevisaoAltaIfNeeded(this.props.value);  
+    }
   }
 
   componentDidMount () {    

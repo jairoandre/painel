@@ -12,7 +12,9 @@ class RiscoQueda extends Component {
   }
 
   fetchData () {
-    this.props.fetchRiscoQuedaIfNeeded(this.props.value);
+    if (this.props.value) {     
+      this.props.fetchRiscoQuedaIfNeeded(this.props.value); 
+    }
   }
 
   componentDidMount () {

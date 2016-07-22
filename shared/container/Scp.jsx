@@ -12,7 +12,9 @@ class Scp extends Component {
     }
 
     fetchData () {
-        this.props.fetchScpIfNeeded(this.props.value);
+        if (this.props.value) {         
+            this.props.fetchScpIfNeeded(this.props.value);   
+        }
     }
 
     componentDidMount () {

@@ -16,7 +16,9 @@ class Alergia extends Component {
   }
 
   fetchData () {
-    this.props.fetchAlergiaIfNeeded(this.props.value);
+    if (this.props.value) {
+      this.props.fetchAlergiaIfNeeded(this.props.value);
+    }
   }
 
   componentDidMount () {

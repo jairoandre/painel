@@ -187,11 +187,11 @@ function shutdown () {
   .forEach(key => {
     openHttpConnections[key].destroy();
   });
-  
+
 }
 
 function handleError (err, req, res, next) {
   console.error(err);
   res.status(500).send({error: 'An error has occurred, please contact support if the error persists'});
-  shutdown(); // process would usually be restarted via something like https://github.com/foreverjs/forever
+  // shutdown(); // process would usually be restarted via something like https://github.com/foreverjs/forever
 }

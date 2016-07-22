@@ -12,7 +12,9 @@ class Precaucao extends Component {
   }
 
   fetchData () {
-    this.props.fetchPrecaucaoIfNeeded(this.props.value);    
+    if (this.props.value) {
+      this.props.fetchPrecaucaoIfNeeded(this.props.value);
+    }
   }
 
   componentDidMount () {

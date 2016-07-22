@@ -12,7 +12,9 @@ class UlceraPressao extends Component {
   }
 
   fetchData () {
-    this.props.fetchUlceraPressaoIfNeeded(this.props.value);    
+    if (this.props.value) {
+      this.props.fetchUlceraPressaoIfNeeded(this.props.value);      
+    }
   }
 
   componentDidMount () {
