@@ -1,6 +1,6 @@
 module.exports = {
   user: 'dbamv',
-  password: 'insertvah16',
+  password: 'vahupdate16',
   connectString: '10.1.0.30:1521/mvprod',
   poolMax: 10,
   poolMin: 2,
